@@ -375,7 +375,7 @@ function renderDaily(){
     <button class="btn btn-g" onclick="loadAll()">🔄 Tải lại</button>
   </div>`;
 
-  if(isNew||typeof openEdit==='object'){
+  if(isNew||(openEdit&&typeof openEdit==='object')){
     const e=typeof openEdit==='object'?openEdit:null;
     html+=`<div class="form-panel">
       <h4>${e?'✏️ Chỉnh sửa báo cáo':'📋 Nhập báo cáo vận hành ngày'}</h4>
@@ -486,7 +486,7 @@ function renderIncidents(){
   </div>
   <div id="import-result"></div>`;
 
-  if(isNew||typeof openEdit==='object'&&openEdit._inc){
+  if(isNew||(openEdit&&typeof openEdit==='object'&&openEdit._inc)){
     const e=typeof openEdit==='object'?openEdit:null;
     html+=`<div class="form-panel">
       <h4>${e?'✏️ Chỉnh sửa sự cố':'🚨 Ghi nhận sự cố / Đơn hàng rớt'}</h4>
@@ -557,7 +557,7 @@ function renderIncidents(){
 }
 
 function openIncForm(d){openEdit=d==='new'?'new-inc':d;renderIncidents();setTimeout(()=>document.getElementById('i-date')?.scrollIntoView({behavior:'smooth',block:'center'}),80);}
-function editInc(obj){obj._inc=true;openEdit=obj;renderIncidents();}
+function editInc(obj){try{const o=typeof obj==='string'?JSON.parse(obj):obj;o._inc=true;openEdit=o;renderIncidents();}catch(e){console.error('editInc error',e);}}
 async function saveInc(){
   const row={
     _inc:true,
@@ -574,7 +574,8 @@ async function saveInc(){
   };
   const idx=data.incidents.findIndex(x=>String(x.id)===String(row.id));
   if(idx>=0)data.incidents[idx]=row;else data.incidents.push(row);
-  await saveRow('Incidents',row);
+  const rowToSave={...row};delete rowToSave._inc;
+  await saveRow('Incidents',rowToSave);
   openEdit=null;renderIncidents();
 }
 async function delInc(id){
@@ -592,7 +593,7 @@ function renderKPI(){
     <button class="btn btn-p" onclick="openKPIForm('new')">+ Nhập KPI tuần này</button>
   </div>`;
 
-  if(openEdit==='new-kpi'||typeof openEdit==='object'&&openEdit._kpi){
+  if(openEdit==='new-kpi'||(openEdit&&typeof openEdit==='object'&&openEdit._kpi)){
     const e=typeof openEdit==='object'?openEdit:null;
     html+=`<div class="form-panel">
       <h4>${e?'✏️ Chỉnh sửa KPI':'📊 Nhập KPI tuần'}</h4>
@@ -666,12 +667,12 @@ function renderKPI(){
 }
 function getWeek(){const d=new Date();const j=new Date(Date.UTC(d.getFullYear(),0,1));const w=Math.ceil(((d-j)/86400000+j.getDay()+1)/7);return d.getFullYear()+'-W'+String(w).padStart(2,'0');}
 function openKPIForm(d){openEdit=d==='new'?'new-kpi':d;renderKPI();}
-function editKPI(o){o._kpi=true;openEdit=o;renderKPI();}
+function editKPI(o){try{const x=typeof o==='string'?JSON.parse(o):Object.assign({},o);x._kpi=true;openEdit=x;renderKPI();}catch(e){console.error('editKPI',e);}}
 async function saveKPI(){
   const row={_kpi:true,id:typeof openEdit==='object'&&openEdit.id?openEdit.id:nextId(data.kpi),week:document.getElementById('k-week').value,otif_target:document.getElementById('k-ot').value,otif_actual:document.getElementById('k-oa').value,report_ontime:document.getElementById('k-rpt').value,incident_count:document.getElementById('k-inc').value,damage_rate:document.getElementById('k-dmg').value,late_booking_gf:document.getElementById('k-lb').value,note:document.getElementById('k-note').value};
   const idx=data.kpi.findIndex(x=>String(x.id)===String(row.id));
   if(idx>=0)data.kpi[idx]=row;else data.kpi.push(row);
-  await saveRow('KPI',row);openEdit=null;renderKPI();
+  const kpiSave={...row};delete kpiSave._kpi;await saveRow('KPI',kpiSave);openEdit=null;renderKPI();
 }
 async function delKPI(id){if(!confirm('Xoá?'))return;data.kpi=data.kpi.filter(x=>String(x.id)!==String(id));await deleteRow('KPI',id);openEdit=null;renderKPI();}
 
@@ -683,7 +684,7 @@ function renderCosts(){
     <button class="btn btn-p" onclick="openCostForm('new')">+ Thêm chi phí</button>
   </div>`;
 
-  if(openEdit==='new-cost'||typeof openEdit==='object'&&openEdit._cost){
+  if(openEdit==='new-cost'||(openEdit&&typeof openEdit==='object'&&openEdit._cost)){
     const e=typeof openEdit==='object'?openEdit:null;
     html+=`<div class="form-panel">
       <h4>${e?'✏️ Chỉnh sửa chi phí':'💰 Thêm khoản chi phí'}</h4>
@@ -756,13 +757,13 @@ function renderCosts(){
   document.getElementById('content').innerHTML=html;
 }
 function openCostForm(d){openEdit=d==='new'?'new-cost':d;renderCosts();}
-function editCost(o){o._cost=true;openEdit=o;renderCosts();}
+function editCost(o){try{const x=typeof o==='string'?JSON.parse(o):Object.assign({},o);x._cost=true;openEdit=x;renderCosts();}catch(e){console.error('editCost',e);}}
 async function saveCost(){
   const ca=+document.getElementById('c-contract').value||0,ac=+document.getElementById('c-actual').value||0;
   const row={_cost:true,id:typeof openEdit==='object'&&openEdit.id?openEdit.id:nextId(data.costs),month:document.getElementById('c-month').value,type:document.getElementById('c-type').value,desc:document.getElementById('c-desc').value,contract_amt:ca,actual_amt:ac,diff:ac-ca,reason:document.getElementById('c-reason').value,approved_by:document.getElementById('c-approved').value};
   const idx=data.costs.findIndex(x=>String(x.id)===String(row.id));
   if(idx>=0)data.costs[idx]=row;else data.costs.push(row);
-  await saveRow('Costs',row);openEdit=null;renderCosts();
+  const costSave={...row};delete costSave._cost;await saveRow('Costs',costSave);openEdit=null;renderCosts();
 }
 async function delCost(id){if(!confirm('Xoá?'))return;data.costs=data.costs.filter(x=>String(x.id)!==String(id));await deleteRow('Costs',id);openEdit=null;renderCosts();}
 
@@ -1129,7 +1130,7 @@ async function importExcel(event) {
       if (exists >= 0) data.incidents[exists] = newRow;
       else data.incidents.push(newRow);
       // Save to API
-      try { await saveRow('Incidents', newRow); } catch(e) {}
+      try { const r2={...newRow};delete r2._inc;await saveRow('Incidents',r2); } catch(e) {}
       imported++;
     }
     toLS('gf2-incidents', data.incidents);
