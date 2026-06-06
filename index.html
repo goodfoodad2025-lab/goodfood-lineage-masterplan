@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Plan – GoodFood × Lineage</title>
+<style>
+:root{--bg:#fff;--bg2:#f7f7f5;--bg3:#f0efe9;--bd:#e5e4dd;--bd2:#d0cfc8;--tx:#1a1a18;--tx2:#5c5c56;--tx3:#9c9c94;--pu:#534AB7;--pub:#EEEDFE;--put:#26215C;--bl:#185FA5;--blb:#E6F1FB;--blt:#0C447C;--gn:#27500A;--gnb:#EAF3DE;--am:#BA7517;--amb:#FAEEDA;--amt:#633806;--rd:#A32D2D;--rdb:#FCEBEB;--rdt:#791F1F;--gy:#888780;--gyb:#F1EFE8;--gyt:#444441;--r:8px;--rl:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--tx);background:var(--bg)}
+.hdr{padding:14px 20px 10px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--bg);z-index:10}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.hdr h1{font-size:17px;font-weight:700;color:var(--tx)}
+.hdr-sub{font-size:11px;color:var(--tx3);margin-top:2px}
+.cfg-banner{background:var(--amb);border:1px solid #FAC775;border-radius:var(--r);padding:10px 14px;margin:10px 20px;font-size:12px;color:var(--amt);display:none}
+.cfg-banner strong{font-weight:700}
+.cfg-banner input{width:100%;margin-top:6px;padding:6px 9px;border-radius:var(--r);border:1px solid #FAC775;font-size:12px;font-family:monospace;background:#fff}
+.cfg-banner .cfg-btns{display:flex;gap:6px;margin-top:8px}
+.tabs{display:flex;border-bottom:1px solid var(--bd);padding:0 20px;background:var(--bg)}
+.tab{padding:9px 15px;cursor:pointer;font-size:13px;border-bottom:2px solid transparent;color:var(--tx2);transition:all .15s}
+.tab.on{color:var(--pu);border-bottom-color:var(--pu);font-weight:700}
+.tab:hover{color:var(--tx)}
+.pnl{display:none;padding:14px 20px}.pnl.on{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.stat{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r);padding:10px 13px}
+.stat-lbl{font-size:11px;color:var(--tx3);margin-bottom:3px}
+.stat-val{font-size:20px;font-weight:700}
+.ctrls{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.ctrls select{font-size:12px;padding:4px 8px;height:30px;border-radius:var(--r);border:1px solid var(--bd2);background:var(--bg);color:var(--tx);cursor:pointer}
+.btn{padding:4px 13px;height:30px;font-size:12px;border-radius:var(--r);cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-weight:600;transition:all .15s}
+.btn-p{background:var(--pu);color:#fff;border:none}.btn-p:hover{background:var(--put)}
+.btn-g{background:var(--bg);color:var(--tx);border:1px solid var(--bd2)}.btn-g:hover{background:var(--bg2)}
+.btn-danger{background:var(--bg);color:var(--rd);border:1px solid var(--rdb)}.btn-danger:hover{background:var(--rdb)}
+.btn-sm{height:26px;font-size:11px;padding:2px 10px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;font-size:11px;color:var(--tx3);align-items:center}
+.ldot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:2px;vertical-align:middle}
+.alert-b{background:var(--amb);border:1px solid #FAC775;border-radius:var(--r);padding:9px 13px;margin-bottom:10px;font-size:12px;color:var(--amt);display:none}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--rl)}
+table.gt{border-collapse:collapse;min-width:100%;font-size:12px;background:var(--bg)}
+.gt th{background:var(--bg2);padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap;font-weight:700;font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.3px}
+.gt td{padding:5px 9px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.gt tr:hover td{background:var(--bg2)}
+.ph-row td{background:var(--pub);color:var(--put);font-weight:700;padding:6px 10px}
+.badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid transparent}
+.s-done{background:var(--gnb);color:var(--gn);border-color:#c0dd97}
+.s-doing{background:var(--blb);color:var(--blt);border-color:#b5d4f4}
+.s-pending{background:var(--amb);color:var(--amt);border-color:#FAC775}
+.s-todo{background:var(--gyb);color:var(--gyt);border-color:var(--bd2)}
+.s-blocked{background:var(--rdb);color:var(--rdt);border-color:#f7c1c1}
+.pb{height:6px;background:var(--bd);border-radius:3px;width:60px;overflow:hidden;display:inline-block;vertical-align:middle}
+.pbf{height:100%;border-radius:3px;background:var(--pu)}
+.tr{display:inline-block;background:var(--amb);color:var(--amt);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
+.ta{display:inline-block;background:var(--rdb);color:var(--rdt);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
+.tc{display:inline-block;background:var(--gnb);color:var(--gn);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
+.ti{display:inline-block;background:var(--blb);color:var(--blt);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
+.raci-cell{min-width:155px;line-height:1.9}
+.name-vi{font-size:11px;color:var(--tx3);margin-top:1px}
+.bar-cell{min-width:280px;padding:4px 9px}
+.bwrap{position:relative;height:16px}
+.bar{position:absolute;height:12px;top:2px;border-radius:3px;min-width:3px}
+.ep{background:var(--bg2);border:1px solid var(--bd2);border-left:3px solid var(--pu);border-radius:0 var(--rl) var(--rl) 0;padding:14px 16px;margin:2px 0 6px}
+.ep h4{font-size:13px;font-weight:700;margin-bottom:12px;color:var(--tx)}
+.ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ep-full{grid-column:1/-1}
+.ep-lbl{font-size:11px;color:var(--tx3);margin-bottom:3px;font-weight:600}
+.ep-input{width:100%;padding:6px 9px;border-radius:var(--r);font-size:12px;border:1px solid var(--bd2);background:var(--bg);color:var(--tx)}
+.ep-input:focus{outline:none;border-color:var(--pu);box-shadow:0 0 0 2px rgba(83,74,183,.1)}
+.ep-section{font-size:11px;font-weight:700;color:var(--tx3);margin:12px 0 6px;letter-spacing:.4px;text-transform:uppercase}
+.ep-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.rt{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.rt th{background:var(--bg2);padding:7px 10px;border-bottom:1px solid var(--bd);font-weight:700;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--tx2)}
+.rt td{padding:7px 10px;border-bottom:1px solid var(--bd);vertical-align:top}
+.rt tr:last-child td{border-bottom:none}
+.sec{font-size:14px;font-weight:700;margin:16px 0 8px;color:var(--tx)}
+.pbar-wrap{margin-bottom:10px}
+.issue-item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border:1px solid var(--bd);border-radius:var(--r);margin-bottom:5px}
+.chg-item{padding:9px 13px;border-left:3px solid var(--pu);background:var(--bg2);border-radius:0 var(--r) var(--r) 0;margin-bottom:6px}
+.loading{text-align:center;padding:40px;color:var(--tx3);font-size:13px}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--pu);border-radius:50%;animation:spin .7s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.online-badge{background:var(--gnb);color:var(--gn);padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700}
+.offline-badge{background:var(--gyb);color:var(--gyt);padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.ep-grid{grid-template-columns:1fr}.ep-full{grid-column:1}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div>
+      <h1>📋 Master Plan – GoodFood × Lineage Bắc Ninh</h1>
+      <div class="hdr-sub">Bắt đầu: 08/06/2026 · <span id="task-count">...</span> tasks · 6 giai đoạn · <span id="conn-badge" class="offline-badge">⚙️ Chưa cấu hình</span></div>
+    </div>
+    <button class="btn btn-g btn-sm" onclick="toggleConfig()">⚙️ Cài đặt API</button>
+  </div>
+</div>
+
+<div id="cfg-banner" class="cfg-banner">
+  <strong>⚙️ Cấu hình Google Sheets API</strong><br>
+  Dán URL Deployment của Apps Script vào đây (xem hướng dẫn trong file <code>AppScript_MasterPlan.js</code>)
+  <input type="text" id="api-url-input" placeholder="https://script.google.com/macros/s/AKfyc.../exec" />
+  <div class="cfg-btns">
+    <button class="btn btn-p btn-sm" onclick="saveApiUrl()">💾 Lưu & kết nối</button>
+    <button class="btn btn-g btn-sm" onclick="toggleConfig()">Đóng</button>
+    <button class="btn btn-danger btn-sm" onclick="clearApiUrl()">Xoá URL</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab on" onclick="go('gantt',this)">Gantt Chart</div>
+  <div class="tab" onclick="go('raci',this)">RACI Matrix</div>
+  <div class="tab" onclick="go('report',this)">Báo cáo tiến độ</div>
+</div>
+
+<div id="pnl-gantt" class="pnl on">
+  <div class="stats" id="sb"></div>
+  <div id="alert-b" class="alert-b"></div>
+  <div class="ctrls">
+    <select id="pf" onchange="fPhase(this.value)">
+      <option value="all">Tất cả giai đoạn</option>
+      <option value="A">A – Overview (Tổng quan)</option>
+      <option value="B">B – Trial (Thử nghiệm)</option>
+      <option value="C">C – Handover FS1 (Bàn giao kênh 1)</option>
+      <option value="D">D – Handover FS2 (Bàn giao kênh 2)</option>
+      <option value="E">E – Handover FS3 (Bàn giao kênh 3)</option>
+      <option value="F">F – Summary (Tổng kết)</option>
+    </select>
+    <select id="sf" onchange="fStatus(this.value)">
+      <option value="all">Tất cả trạng thái</option>
+      <option value="done">✅ Done – Hoàn thành</option>
+      <option value="doing">🔵 Đang thực hiện</option>
+      <option value="pending">⏳ Pending – Chờ xử lý</option>
+      <option value="todo">⬜ Chưa bắt đầu</option>
+      <option value="blocked">🔴 Blocked – Bị chặn</option>
+    </select>
+    <button class="btn btn-p" onclick="addTask()">+ Thêm task</button>
+    <button class="btn btn-g" onclick="refreshData()">🔄 Tải lại</button>
+  </div>
+  <div class="legend">
+    <span><span class="ldot" style="background:#27500A"></span>Done</span>
+    <span><span class="ldot" style="background:#185FA5"></span>Đang thực hiện</span>
+    <span><span class="ldot" style="background:#BA7517"></span>Pending</span>
+    <span><span class="ldot" style="background:#888780"></span>Chưa bắt đầu</span>
+    <span><span class="ldot" style="background:#A32D2D"></span>Blocked</span>
+    &nbsp;|&nbsp;
+    <span><span class="tr">R</span> Thực hiện</span>
+    <span><span class="ta">A</span> Chịu trách nhiệm</span>
+    <span><span class="tc">C</span> Tham vấn</span>
+    <span><span class="ti">I</span> Thông báo</span>
+  </div>
+  <div id="gantt-loading" class="loading"><span class="spinner"></span>Đang tải dữ liệu...</div>
+  <div class="tbl-wrap" id="gantt-table-wrap" style="display:none">
+    <table class="gt">
+      <thead><tr>
+        <th style="width:28px">TT</th>
+        <th style="min-width:200px">Công việc</th>
+        <th style="width:30px">GF</th>
+        <th style="width:30px">LN</th>
+        <th>Trạng thái</th>
+        <th>% HT</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>R / A / C / I</th>
+        <th style="min-width:280px">Timeline (Jun–Aug 2026)</th>
+        <th style="width:70px">Edit</th>
+      </tr></thead>
+      <tbody id="gb"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="pnl-raci" class="pnl"><div id="raci-content"></div></div>
+
+<div id="pnl-report" class="pnl">
+  <div class="stats" id="rsb"></div>
+  <div class="sec">Tiến độ theo giai đoạn</div>
+  <div id="phase-prog"></div>
+  <div class="sec">Mục Pending / Blocked cần xử lý</div>
+  <div id="issue-list"></div>
+  <div class="sec">Log thay đổi</div>
+  <div id="chg-log"></div>
+</div>
+
+<script>
+const S0=new Date('2026-06-08'),TDAYS=90;
+const PC={A:'#534AB7',B:'#185FA5',C:'#0F6E56',D:'#BA7517',E:'#993C1D',F:'#A32D2D'};
+const PN={A:'Overview – Tổng quan',B:'Trial – Thử nghiệm',C:'Handover FS1 – Bàn giao kênh 1',D:'Handover FS2 – Bàn giao kênh 2',E:'Handover FS3 – Bàn giao kênh 3',F:'Summary – Tổng kết'};
+const SC={done:'#27500A',doing:'#185FA5',pending:'#BA7517',todo:'#888780',blocked:'#A32D2D'};
+const SL={done:'✅ Done',doing:'🔵 Đang thực hiện',pending:'⏳ Pending',todo:'⬜ Chưa bắt đầu',blocked:'🔴 Blocked'};
+const SS={done:'s-done',doing:'s-doing',pending:'s-pending',todo:'s-todo',blocked:'s-blocked'};
+
+let tasks=[],changes=[],openId=null,fpv='all',fsv='all';
+let API_URL = localStorage.getItem('gf-api-url') || '';
+
+// ---- CONFIG ----
+function toggleConfig(){
+  const b=document.getElementById('cfg-banner');
+  b.style.display = b.style.display==='none'||!b.style.display ? 'block' : 'none';
+  if(b.style.display==='block') document.getElementById('api-url-input').value=API_URL;
+}
+function saveApiUrl(){
+  API_URL = document.getElementById('api-url-input').value.trim();
+  localStorage.setItem('gf-api-url', API_URL);
+  toggleConfig();
+  loadData();
+}
+function clearApiUrl(){
+  API_URL=''; localStorage.removeItem('gf-api-url');
+  updateBadge(false); toggleConfig();
+}
+function updateBadge(online){
+  const b=document.getElementById('conn-badge');
+  if(online){b.className='online-badge';b.textContent='🟢 Online – Google Sheets';}
+  else{b.className='offline-badge';b.textContent=API_URL?'🔴 Lỗi kết nối':'⚙️ Chưa cấu hình API';}
+}
+
+// ---- API ----
+async function api(params={}, body=null){
+  if(!API_URL) throw new Error('no-api');
+  const url = API_URL + (body ? '' : '?'+new URLSearchParams(params));
+  const opts = body ? {method:'POST',body:JSON.stringify(body)} : {};
+  const r = await fetch(url, opts);
+  return r.json();
+}
+
+async function loadData(){
+  document.getElementById('gantt-loading').style.display='block';
+  document.getElementById('gantt-table-wrap').style.display='none';
+  if(!API_URL){
+    // fallback localStorage
+    try{const d=localStorage.getItem('gf-tasks');if(d)tasks=JSON.parse(d);}catch(e){}
+    try{const d=localStorage.getItem('gf-changes');if(d)changes=JSON.parse(d);}catch(e){}
+    if(!tasks.length) tasks=getDefaultTasks();
+    updateBadge(false);
+    finishLoad();
+    return;
+  }
+  try{
+    const [t,c] = await Promise.all([
+      api({action:'getTasks'}),
+      api({action:'getChanges'})
+    ]);
+    tasks = Array.isArray(t) ? t.map(normalizeTask) : getDefaultTasks();
+    changes = Array.isArray(c) ? c : [];
+    // convert numeric fields
+    tasks.forEach(t=>{t.pct=parseInt(t.pct)||0;t.gf=t.gf==1||t.gf==='1'||t.gf===true?1:0;t.ln=t.ln==1||t.ln==='1'||t.ln===true?1:0;});
+    updateBadge(true);
+  } catch(e){
+    console.error(e);
+    try{const d=localStorage.getItem('gf-tasks');if(d)tasks=JSON.parse(d);}catch(e2){}
+    if(!tasks.length) tasks=getDefaultTasks();
+    updateBadge(false);
+  }
+  finishLoad();
+}
+
+function finishLoad(){
+  document.getElementById('gantt-loading').style.display='none';
+  document.getElementById('gantt-table-wrap').style.display='block';
+  document.getElementById('task-count').textContent=tasks.length;
+  renderGantt();
+}
+
+async function saveTask(task){
+  // save locally always
+  localStorage.setItem('gf-tasks',JSON.stringify(tasks));
+  if(API_URL){
+    try{await api({},{action:'saveTask',task});}catch(e){}
+  }
+}
+async function saveChange(change){
+  changes.push(change);
+  localStorage.setItem('gf-changes',JSON.stringify(changes));
+  if(API_URL){
+    try{await api({},{action:'addChange',change});}catch(e){}
+  }
+}
+async function deleteTaskRemote(id){
+  tasks=tasks.filter(x=>x.id!==id);
+  localStorage.setItem('gf-tasks',JSON.stringify(tasks));
+  if(API_URL){
+    try{await api({},{action:'deleteTask',id});}catch(e){}
+  }
+}
+
+function refreshData(){loadData();}
+function normalizeTask(t){return{id:t.id,ph:t.ph,tt:t.tt,name:t.name||'',name_vi:t.name_vi||'',gf:t.gf,ln:t.ln,st:t.st||'todo',pct:parseInt(t.pct)||0,s:t.s||'2026-06-08',e:t.e||'2026-06-08',os:t.os||t.s||'2026-06-08',oe:t.oe||t.e||'2026-06-08',r:t.r||'',a:t.a||'',c:t.c||'',i:t.i||'BLD GF'};}
+
+// ---- RENDER ----
+function go(t,el){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.pnl').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');document.getElementById('pnl-'+t).classList.add('on');
+  if(t==='raci')renderRaci();if(t==='report')renderReport();
+}
+function doff(ds){return Math.round((new Date(ds)-S0)/86400000);}
+function fmt(ds){const d=new Date(ds);return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0');}
+function fPhase(v){fpv=v;openId=null;renderGantt();}
+function fStatus(v){fsv=v;openId=null;renderGantt();}
+
+function raciCell(t){
+  return `<div class="raci-cell">
+    <div><span class="tr">R</span> ${t.r}</div>
+    <div><span class="ta">A</span> ${t.a}</div>
+    <div><span class="tc">C</span> ${t.c}</div>
+    <div><span class="ti">I</span> ${t.i}</div>
+  </div>`;
+}
+
+function renderGantt(){
+  const filtered=tasks.filter(t=>(fpv==='all'||t.ph===fpv)&&(fsv==='all'||t.st===fsv));
+  let html='',lastPh='';
+  filtered.forEach(t=>{
+    if(t.ph!==lastPh){
+      lastPh=t.ph;
+      html+=`<tr class="ph-row"><td colspan="11"><span style="background:${PC[t.ph]};color:#fff;padding:1px 10px;border-radius:9px;font-size:11px;margin-right:7px;font-weight:700">${t.ph}</span>${PN[t.ph]}</td></tr>`;
+    }
+    const so=doff(t.s),eo=doff(t.e),dur=Math.max(1,eo-so+1);
+    const lft=Math.max(0,(so/TDAYS)*100).toFixed(2);
+    const wid=Math.min(100-parseFloat(lft),(dur/TDAYS)*100).toFixed(2);
+    let orig='';
+    if(t.os!==t.s||t.oe!==t.e){
+      const ol=Math.max(0,(doff(t.os)/TDAYS)*100).toFixed(2);
+      const ow=Math.min(100-parseFloat(ol),(Math.max(1,doff(t.oe)-doff(t.os)+1)/TDAYS)*100).toFixed(2);
+      orig=`<div class="bar" style="left:${ol}%;width:${ow}%;background:#534AB7;opacity:.22"></div>`;
+    }
+    const isOpen=openId===t.id;
+    html+=`<tr>
+      <td style="color:#9c9c94;font-size:11px">${t.tt}</td>
+      <td style="white-space:normal;line-height:1.4;min-width:200px;max-width:260px">
+        <div style="font-weight:500">${t.name}</div>
+        ${t.name_vi?`<div class="name-vi">${t.name_vi}</div>`:''}
+      </td>
+      <td style="text-align:center">${t.gf?'<span style="color:#27500A;font-weight:700">✓</span>':''}</td>
+      <td style="text-align:center">${t.ln?'<span style="color:#185FA5;font-weight:700">✓</span>':''}</td>
+      <td><span class="badge ${SS[t.st]}">${SL[t.st]}</span></td>
+      <td><span class="pb"><span class="pbf" style="width:${t.pct}%"></span></span> <span style="font-size:11px;color:#9c9c94">${t.pct}%</span></td>
+      <td style="font-size:11px;white-space:nowrap;color:#5c5c56">${fmt(t.s)}</td>
+      <td style="font-size:11px;white-space:nowrap;color:#5c5c56">${fmt(t.e)}</td>
+      <td>${raciCell(t)}</td>
+      <td class="bar-cell"><div class="bwrap">${orig}<div class="bar" style="left:${lft}%;width:${wid}%;background:${SC[t.st]}" title="${fmt(t.s)}→${fmt(t.e)}"></div></div></td>
+      <td><button onclick="toggleEdit(${t.id})" style="background:${isOpen?'#EEEDFE':'#fff'};border:1px solid ${isOpen?'#534AB7':'#d0cfc8'};border-radius:6px;padding:3px 10px;cursor:pointer;font-size:12px;color:${isOpen?'#534AB7':'#5c5c56'};font-weight:600">${isOpen?'✕':'✏️ Sửa'}</button></td>
+    </tr>${isOpen?renderEP(t):''}`;
+  });
+  document.getElementById('gb').innerHTML=html;
+  renderStats();renderAlerts();
+}
+
+function renderEP(t){
+  return `<tr><td colspan="11" style="padding:0 10px 10px">
+    <div class="ep">
+      <h4>✏️ Chỉnh sửa: ${t.name}</h4>
+      <div class="ep-grid">
+        <div class="ep-full"><div class="ep-lbl">Tên (tiếng Anh)</div><input class="ep-input" id="n-${t.id}" value="${t.name}"/></div>
+        <div class="ep-full"><div class="ep-lbl">Tên (tiếng Việt)</div><input class="ep-input" id="nv-${t.id}" value="${t.name_vi||''}"/></div>
+        <div><div class="ep-lbl">Ngày bắt đầu</div><input class="ep-input" type="date" id="s-${t.id}" value="${t.s}"/></div>
+        <div><div class="ep-lbl">Ngày kết thúc</div><input class="ep-input" type="date" id="e-${t.id}" value="${t.e}"/></div>
+        <div><div class="ep-lbl">Trạng thái</div>
+          <select class="ep-input" id="st-${t.id}">
+            <option value="todo"${t.st==='todo'?' selected':''}>⬜ Chưa bắt đầu</option>
+            <option value="doing"${t.st==='doing'?' selected':''}>🔵 Đang thực hiện</option>
+            <option value="pending"${t.st==='pending'?' selected':''}>⏳ Pending – Chờ xử lý</option>
+            <option value="done"${t.st==='done'?' selected':''}>✅ Done – Hoàn thành</option>
+            <option value="blocked"${t.st==='blocked'?' selected':''}>🔴 Blocked – Bị chặn</option>
+          </select>
+        </div>
+        <div><div class="ep-lbl">% Hoàn thành</div><input class="ep-input" type="number" id="p-${t.id}" min="0" max="100" value="${t.pct}"/></div>
+      </div>
+      <div class="ep-section">RACI</div>
+      <div class="ep-grid">
+        <div><div class="ep-lbl"><span class="tr">R</span> Responsible – Người thực hiện</div><input class="ep-input" id="r-${t.id}" value="${t.r}"/></div>
+        <div><div class="ep-lbl"><span class="ta">A</span> Accountable – Chịu trách nhiệm chính</div><input class="ep-input" id="a-${t.id}" value="${t.a}"/></div>
+        <div><div class="ep-lbl"><span class="tc">C</span> Consulted – Người tham vấn</div><input class="ep-input" id="c-${t.id}" value="${t.c}"/></div>
+        <div><div class="ep-lbl"><span class="ti">I</span> Informed – Được thông báo</div><input class="ep-input" id="i-${t.id}" value="${t.i}"/></div>
+        <div class="ep-full"><div class="ep-lbl">Lý do thay đổi (nếu có)</div><input class="ep-input" id="note-${t.id}" placeholder="VD: dời vì chờ Lineage phản hồi..."/></div>
+      </div>
+      <div class="ep-actions">
+        <button class="btn btn-p" onclick="saveEdit(${t.id})">💾 Lưu thay đổi</button>
+        <button class="btn btn-g" onclick="toggleEdit(${t.id})">Huỷ</button>
+        <button class="btn btn-danger" onclick="delTask(${t.id})">🗑 Xoá task</button>
+      </div>
+    </div>
+  </td></tr>`;
+}
+
+function toggleEdit(id){openId=(openId===id)?null:id;renderGantt();}
+
+async function saveEdit(id){
+  const t=tasks.find(x=>String(x.id)===String(id));
+  const ns=document.getElementById('s-'+id).value;
+  const ne=document.getElementById('e-'+id).value;
+  const nst=document.getElementById('st-'+id).value;
+  const npct=Math.min(100,Math.max(0,parseInt(document.getElementById('p-'+id).value)||0));
+  const note=document.getElementById('note-'+id).value;
+  const today=new Date().toLocaleDateString('vi-VN');
+  if(t.s!==ns||t.e!==ne){
+    const shift=doff(ns)-doff(t.s);
+    await saveChange({date:today,task:t.name,field:'Timeline',old:fmt(t.s)+'→'+fmt(t.e),nw:fmt(ns)+'→'+fmt(ne),note,editor:''});
+    if(shift>0){const ps=['A','B','C','D','E','F'],pi=ps.indexOf(t.ph);tasks.forEach(x=>{if(String(x.id)===String(id))return;if(ps.indexOf(x.ph)>pi){const sd=new Date(x.s);sd.setDate(sd.getDate()+shift);const ed=new Date(x.e);ed.setDate(ed.getDate()+shift);x.s=sd.toISOString().slice(0,10);x.e=ed.toISOString().slice(0,10);}});}
+  }
+  if(t.st!==nst) await saveChange({date:today,task:t.name,field:'Trạng thái',old:SL[t.st],nw:SL[nst],note,editor:''});
+  t.name=document.getElementById('n-'+id).value;
+  t.name_vi=document.getElementById('nv-'+id).value;
+  t.s=ns;t.e=ne;t.st=nst;t.pct=npct;
+  t.r=document.getElementById('r-'+id).value;
+  t.a=document.getElementById('a-'+id).value;
+  t.c=document.getElementById('c-'+id).value;
+  t.i=document.getElementById('i-'+id).value;
+  openId=null;
+  await saveTask(t);
+  renderGantt();
+}
+
+async function delTask(id){
+  if(!confirm('Xoá task này?'))return;
+  await deleteTaskRemote(id);
+  openId=null;renderGantt();
+}
+
+function addTask(){
+  const maxId=Math.max(0,...tasks.map(x=>parseInt(x.id)||0));
+  const nt={id:maxId+1,ph:'F',tt:'*',name:'New Task',name_vi:'Task mới',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'',a:'',c:'',i:'BLD GF'};
+  tasks.push(nt);openId=nt.id;fpv='all';fsv='all';
+  document.getElementById('pf').value='all';document.getElementById('sf').value='all';
+  renderGantt();
+  setTimeout(()=>{const el=document.getElementById('n-'+nt.id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.focus();el.select();}},80);
+}
+
+function renderStats(){
+  const n=tasks.length,done=tasks.filter(t=>t.st==='done').length,doing=tasks.filter(t=>t.st==='doing').length,avg=n?Math.round(tasks.reduce((s,t)=>s+(parseInt(t.pct)||0),0)/n):0;
+  document.getElementById('sb').innerHTML=`
+    <div class="stat"><div class="stat-lbl">Tổng tasks</div><div class="stat-val">${n}</div></div>
+    <div class="stat"><div class="stat-lbl">✅ Hoàn thành</div><div class="stat-val" style="color:#27500A">${done}</div></div>
+    <div class="stat"><div class="stat-lbl">🔵 Đang chạy</div><div class="stat-val" style="color:#185FA5">${doing}</div></div>
+    <div class="stat"><div class="stat-lbl">📊 Tiến độ</div><div class="stat-val" style="color:#534AB7">${avg}%</div></div>`;
+  document.getElementById('task-count').textContent=n;
+}
+function renderAlerts(){
+  const issues=tasks.filter(t=>t.st==='blocked'||t.st==='pending'),el=document.getElementById('alert-b');
+  if(issues.length){el.style.display='block';el.innerHTML='⚠️ <strong>'+issues.length+' task cần xử lý:</strong> '+issues.map(t=>t.name_vi||t.name).join(' · ');}
+  else el.style.display='none';
+}
+
+function renderRaci(){
+  const d=[
+    {proc:'Nhập hàng (Inbound)',rows:[
+      ['1','Gửi Booking nhập hàng','Transimex','GF (SC Mgr)','GF / Lineage','BLD GF / HOD','Trước 15h00 D-1'],
+      ['2','Phản hồi kế hoạch nhập','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 17h00 D-1'],
+      ['3','Nhận hàng tại kho','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','08h–17h ngày D'],
+      ['4','Gửi báo cáo nhập hàng','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 09h00 D+1'],
+    ]},
+    {proc:'Xuất hàng (Outbound)',rows:[
+      ['1','Gửi Booking xuất hàng','GF','GF (SC Mgr)','Lineage','BLD GF / HOD','Trước 17h30 D-1'],
+      ['2','Phản hồi kế hoạch xuất','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 18h00 D-1'],
+      ['3','Gửi Trucking Plan (Kế hoạch xe)','GF','GF (SC Mgr)','Lineage','BLD GF / HOD','Trước 18h30 D-1'],
+      ['4','Pick hàng theo xe','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','19h D-1 → 00h D'],
+      ['5','Xuất hàng & Bàn giao tài xế','Lineage','Lineage (WH Mgr)','GF / Tài xế','BLD GF / HOD','Từ 07h00 ngày D'],
+      ['6','Gửi báo cáo tự động hàng ngày','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 09h00 hàng ngày'],
+      ['7','Phản hồi sai sót sau giao hàng','GF','GF (SC Mgr)','Lineage','BLD GF / HOD','Trước 09h00 D+1'],
+    ]},
+    {proc:'Đối soát & Thanh toán (Reconciliation)',rows:[
+      ['1','Tổng hợp chi phí vận hành & Gửi GF','LN BN','LN BN (WH Mgr)','GF','BLD GF / HOD','Ngày 26 hàng tháng'],
+      ['2','GF kiểm tra & phản hồi chi phí','GF','GF (Finance Mgr)','LN BN','BLD GF / HOD','Trong 3 ngày làm việc'],
+      ['3','Xuất hóa đơn & Thanh toán','LN BN','LN BN (WH Mgr)','GF','BLD GF / HOD','Theo điều khoản HĐ'],
+    ]},
+  ];
+  document.getElementById('raci-content').innerHTML=d.map(p=>`
+    <div class="sec">${p.proc}</div>
+    <div style="overflow-x:auto"><table class="rt"><thead><tr>
+      <th style="width:28px">#</th><th>Công việc</th>
+      <th><span class="tr">R</span> Responsible</th>
+      <th><span class="ta">A</span> Accountable</th>
+      <th><span class="tc">C</span> Consulted</th>
+      <th><span class="ti">I</span> Informed</th>
+      <th>Timeline</th>
+    </tr></thead><tbody>
+    ${p.rows.map(r=>`<tr><td style="color:#9c9c94;text-align:center">${r[0]}</td>
+      <td>${r[1]}</td><td><span class="tr">${r[2]}</span></td>
+      <td><span class="ta">${r[3]}</span></td><td><span class="tc">${r[4]}</span></td>
+      <td><span class="ti">${r[5]}</span></td>
+      <td style="font-size:11px;color:#9c9c94">${r[6]}</td></tr>`).join('')}
+    </tbody></table></div>`).join('');
+}
+
+function renderReport(){
+  const n=tasks.length,done=tasks.filter(t=>t.st==='done').length,doing=tasks.filter(t=>t.st==='doing').length,pend=tasks.filter(t=>t.st==='pending').length,blk=tasks.filter(t=>t.st==='blocked').length,avg=n?Math.round(tasks.reduce((s,t)=>s+(parseInt(t.pct)||0),0)/n):0;
+  document.getElementById('rsb').innerHTML=`
+    <div class="stat"><div class="stat-lbl">✅ Done</div><div class="stat-val" style="color:#27500A">${done}/${n}</div></div>
+    <div class="stat"><div class="stat-lbl">🔵 Đang chạy</div><div class="stat-val" style="color:#185FA5">${doing}</div></div>
+    <div class="stat"><div class="stat-lbl">⏳ Pending/Blocked</div><div class="stat-val" style="color:#BA7517">${pend+blk}</div></div>
+    <div class="stat"><div class="stat-lbl">📊 Tiến độ tổng</div><div class="stat-val" style="color:#534AB7">${avg}%</div></div>`;
+  const ps=['A','B','C','D','E','F'];
+  document.getElementById('phase-prog').innerHTML=ps.map(p=>{
+    const pt=tasks.filter(t=>t.ph===p);if(!pt.length)return'';
+    const pd=pt.filter(t=>t.st==='done').length,pp=pt.length?Math.round(pt.reduce((s,t)=>s+(parseInt(t.pct)||0),0)/pt.length):0;
+    return `<div class="pbar-wrap">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+        <span><span style="background:${PC[p]};color:#fff;padding:1px 9px;border-radius:8px;font-size:11px;margin-right:6px;font-weight:700">${p}</span>${PN[p]}</span>
+        <span style="color:#9c9c94">${pd}/${pt.length} · ${pp}%</span>
+      </div>
+      <div style="height:7px;background:#e5e4dd;border-radius:4px;overflow:hidden">
+        <div style="height:100%;width:${pp}%;background:${PC[p]};border-radius:4px"></div>
+      </div></div>`;
+  }).join('');
+  const issues=tasks.filter(t=>t.st==='blocked'||t.st==='pending');
+  document.getElementById('issue-list').innerHTML=issues.length===0?'<p style="color:#9c9c94;font-size:13px">Không có mục nào ✅</p>':issues.map(t=>`
+    <div class="issue-item">
+      <span><span class="badge ${SS[t.st]}" style="margin-right:8px">${SL[t.st]}</span><span style="font-weight:500">${t.name}</span>${t.name_vi?`<span style="color:#9c9c94;font-size:11px"> – ${t.name_vi}</span>`:''}</span>
+      <span style="font-size:11px;color:#9c9c94;white-space:nowrap;margin-left:8px">${fmt(t.s)}→${fmt(t.e)}</span>
+    </div>`).join('');
+  document.getElementById('chg-log').innerHTML=changes.length===0?'<p style="color:#9c9c94;font-size:13px">Chưa có thay đổi nào</p>':changes.slice().reverse().map(c=>`
+    <div class="chg-item">
+      <div style="font-weight:700;margin-bottom:2px">${c.task}</div>
+      <div style="color:#5c5c56">${c.field}: <span style="color:#A32D2D">${c.old}</span> → <span style="color:#27500A">${c.nw||c.new||''}</span></div>
+      ${c.note?`<div style="color:#9c9c94;margin-top:2px">Lý do: ${c.note}</div>`:''}
+      <div style="font-size:11px;color:#b0b0a8;margin-top:2px">${c.date}</div>
+    </div>`).join('');
+}
+
+function getDefaultTasks(){
+  return [
+    {id:1,ph:'A',tt:'1',name:'Meeting GoodFood + Lineage',name_vi:'Họp khởi động GoodFood + Lineage',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'Huân, Hòa, Phương',a:'Hòa',c:'Phương',i:'BLD GF'},
+    {id:2,ph:'A',tt:'2',name:'Drafted SOP',name_vi:'Soạn thảo SOP vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'Hòa',a:'Hòa',c:'GF team',i:'BLD GF'},
+    {id:3,ph:'A',tt:'3',name:'Share SOP to GoodFood',name_vi:'Chia sẻ SOP cho GoodFood',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Hòa',a:'Hòa',c:'GF team',i:'BLD GF'},
+    {id:4,ph:'A',tt:'4',name:'GoodFood share SOP – learning together',name_vi:'GoodFood chia sẻ SOP – cùng học quy trình',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+    {id:5,ph:'A',tt:'5',name:'Document follow up (VAT, PO, Delivery note)',name_vi:'Theo dõi chứng từ (Hóa đơn VAT, Đơn mua hàng, Phiếu giao hàng)',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân / Hưng / Hiền',a:'GF SC Mgr',c:'Lineage',i:'BLD GF'},
+    {id:6,ph:'A',tt:'6',name:'KPI and expectation sharing',name_vi:'Chia sẻ KPI và kỳ vọng vận hành',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+    {id:7,ph:'A',tt:'7',name:'Identify WHO DO WHAT for Trial',name_vi:'Xác định ai làm gì trong giai đoạn thử nghiệm',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Hòa / Huân / Hưng / Hiền',a:'Hòa',c:'GF + Lineage',i:'BLD GF'},
+    {id:8,ph:'B',tt:'1',name:'Lineage interview Admin + Assessment risk',name_vi:'Lineage phỏng vấn bộ phận Admin + Đánh giá rủi ro & quyền truy cập hệ thống',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-11',os:'2026-06-10',oe:'2026-06-11',r:'Hạnh',a:'Hòa',c:'Huân',i:'BLD GF'},
+    {id:9,ph:'B',tt:'2',name:'Assessment transportation terminal (incase)',name_vi:'Đánh giá đầu mối vận chuyển (phòng trường hợp cần thay đổi)',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-14',os:'2026-06-10',oe:'2026-06-14',r:'Hạnh',a:'Huân',c:'GF team',i:'BLD GF'},
+    {id:10,ph:'B',tt:'3',name:'People management',name_vi:'Quản lý nhân sự – phân công đội vận hành',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-14',os:'2026-06-10',oe:'2026-06-14',r:'Hạnh / Huân / Hiền',a:'Hòa',c:'GF + Lineage',i:'BLD GF'},
+    {id:11,ph:'B',tt:'4',name:'Truck management after handover',name_vi:'Quản lý xe tải sau khi bàn giao',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-15',e:'2026-06-17',os:'2026-06-15',oe:'2026-06-17',r:'Hạnh / Huân / Hiền',a:'Huân',c:'GF team',i:'BLD GF'},
+    {id:12,ph:'B',tt:'5',name:'Follow up – Lineage deliver OTIF',name_vi:'Theo dõi – Lineage giao hàng đúng thời gian & đủ số lượng (On Time In Full)',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-14',e:'2026-06-18',os:'2026-06-14',oe:'2026-06-18',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+    {id:13,ph:'B',tt:'6',name:'Trial review meeting',name_vi:'Họp đánh giá kết quả giai đoạn thử nghiệm',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-21',os:'2026-06-21',oe:'2026-06-21',r:'Hòa / Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'Will (consultant)',i:'BLD GF'},
+    {id:14,ph:'B',tt:'7',name:'Identify WHO DO WHAT – next step',name_vi:'Xác định phân công công việc cho giai đoạn tiếp theo',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-21',os:'2026-06-21',oe:'2026-06-21',r:'Hòa / Huân / Hưng / Hạnh',a:'Hòa',c:'Will (consultant)',i:'BLD GF'},
+    {id:15,ph:'B',tt:'8',name:'Adjustment + Drafted contract',name_vi:'Điều chỉnh (nếu cần) + Soạn thảo hợp đồng',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-22',os:'2026-06-21',oe:'2026-06-22',r:'Will',a:'Will',c:'Hòa',i:'BLD GF'},
+    {id:16,ph:'C',tt:'1',name:'Handover FS1 channel',name_vi:'Bàn giao kênh FS1 (Food Service 1) cho Lineage vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-27',e:'2026-07-03',os:'2026-06-27',oe:'2026-07-03',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
+    {id:17,ph:'C',tt:'2',name:'Follow up – Lineage deliver FS1 good service',name_vi:'Theo dõi – Lineage giao hàng kênh FS1 đạt chất lượng dịch vụ',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-27',e:'2026-07-03',os:'2026-06-27',oe:'2026-07-03',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+    {id:18,ph:'C',tt:'3',name:'Review meeting FS1',name_vi:'Họp đánh giá vận hành kênh FS1',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-02',e:'2026-07-02',os:'2026-07-02',oe:'2026-07-02',r:'Hòa / Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'Will',i:'BLD GF'},
+    {id:19,ph:'D',tt:'1',name:'Handover FS2 channel',name_vi:'Bàn giao kênh FS2 (Food Service 2) cho Lineage vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-07-04',e:'2026-07-10',os:'2026-07-04',oe:'2026-07-10',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
+    {id:20,ph:'D',tt:'2',name:'Follow up – Lineage deliver FS2 good service',name_vi:'Theo dõi – Lineage giao hàng kênh FS2 đạt chất lượng dịch vụ',gf:1,ln:0,st:'todo',pct:0,s:'2026-07-04',e:'2026-07-10',os:'2026-07-04',oe:'2026-07-10',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+    {id:21,ph:'D',tt:'3',name:'Review meeting FS2',name_vi:'Họp đánh giá vận hành kênh FS2',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-09',e:'2026-07-09',os:'2026-07-09',oe:'2026-07-09',r:'Hòa / Huân / Hưng / Hạnh',a:'Hòa',c:'Will',i:'BLD GF'},
+    {id:22,ph:'E',tt:'1',name:'Handover FS3 channel',name_vi:'Bàn giao kênh FS3 (Food Service 3) cho Lineage vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-07-11',e:'2026-07-17',os:'2026-07-11',oe:'2026-07-17',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
+    {id:23,ph:'E',tt:'2',name:'Follow up – Lineage deliver FS3 good service',name_vi:'Theo dõi – Lineage giao hàng kênh FS3 đạt chất lượng dịch vụ',gf:1,ln:0,st:'todo',pct:0,s:'2026-07-11',e:'2026-07-17',os:'2026-07-11',oe:'2026-07-17',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+    {id:24,ph:'E',tt:'3',name:'Review meeting FS3',name_vi:'Họp đánh giá vận hành kênh FS3',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-16',e:'2026-07-16',os:'2026-07-16',oe:'2026-07-16',r:'Hòa / Huân / Hưng / Hạnh',a:'Hòa',c:'Will',i:'BLD GF'},
+    {id:25,ph:'F',tt:'1',name:'Summary review meeting',name_vi:'Họp tổng kết toàn bộ dự án',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-25',e:'2026-07-26',os:'2026-07-25',oe:'2026-07-26',r:'All team',a:'Will',c:'Will / Hòa',i:'BLD GF'},
+    {id:26,ph:'F',tt:'2',name:'Contract sign off',name_vi:'Ký kết hợp đồng chính thức',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-27',e:'2026-07-27',os:'2026-07-27',oe:'2026-07-27',r:'Will',a:'Will',c:'Hòa',i:'BLD GF'},
+    {id:27,ph:'F',tt:'3',name:'Arrange for driver',name_vi:'Sắp xếp tài xế & đội vận chuyển chính thức',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-29',e:'2026-07-29',os:'2026-07-29',oe:'2026-07-29',r:'Hạnh / Hiền / Huân',a:'Will',c:'Huân',i:'BLD GF'},
+    {id:28,ph:'F',tt:'4',name:'Cut-off time – full scope handover',name_vi:'Thời điểm cắt – bàn giao toàn bộ phạm vi vận hành sang Lineage',gf:1,ln:1,st:'todo',pct:0,s:'2026-08-01',e:'2026-08-01',os:'2026-08-01',oe:'2026-08-01',r:'Will / Hòa',a:'Will',c:'Hòa',i:'BLD GF'},
+    {id:29,ph:'F',tt:'5',name:'Identify roles GoodFood & Lineage',name_vi:'Xác định rõ vai trò GoodFood & Lineage trong vận hành dài hạn',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-01',e:'2026-08-01',os:'2026-08-01',oe:'2026-08-01',r:'Hòa / Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'Will',i:'BLD GF'},
+    {id:30,ph:'F',tt:'6',name:'SOP Lineage × GoodFood (full version)',name_vi:'Hoàn thiện SOP vận hành Lineage × GoodFood (phiên bản đầy đủ chính thức)',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-08',e:'2026-08-15',os:'2026-08-08',oe:'2026-08-15',r:'Hòa',a:'Hòa',c:'All team',i:'BLD GF'},
+    {id:31,ph:'F',tt:'7',name:'Review SOP and alignment',name_vi:'Rà soát SOP & đồng thuận cuối cùng giữa hai bên',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-15',e:'2026-08-22',os:'2026-08-15',oe:'2026-08-22',r:'Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'All team',i:'BLD GF'},
+  ];
+}
+
+loadData();
+</script>
+</body>
+</html>
