@@ -2,558 +2,975 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Master Plan – GoodFood × Lineage</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GoodFood × Lineage – Operations Hub</title>
 <style>
-:root{--bg:#fff;--bg2:#f7f7f5;--bg3:#f0efe9;--bd:#e5e4dd;--bd2:#d0cfc8;--tx:#1a1a18;--tx2:#5c5c56;--tx3:#9c9c94;--pu:#534AB7;--pub:#EEEDFE;--put:#26215C;--bl:#185FA5;--blb:#E6F1FB;--blt:#0C447C;--gn:#27500A;--gnb:#EAF3DE;--am:#BA7517;--amb:#FAEEDA;--amt:#633806;--rd:#A32D2D;--rdb:#FCEBEB;--rdt:#791F1F;--gy:#888780;--gyb:#F1EFE8;--gyt:#444441;--r:8px;--rl:12px}
+:root{
+  --bg:#fff;--bg2:#f7f7f5;--bg3:#f0efe9;--bd:#e5e4dd;--bd2:#d0cfc8;
+  --tx:#1a1a18;--tx2:#5c5c56;--tx3:#9c9c94;
+  --pu:#534AB7;--pub:#EEEDFE;--put:#26215C;
+  --bl:#185FA5;--blb:#E6F1FB;--blt:#0C447C;
+  --gn:#27500A;--gnb:#EAF3DE;--gnt:#27500A;
+  --am:#BA7517;--amb:#FAEEDA;--amt:#633806;
+  --rd:#A32D2D;--rdb:#FCEBEB;--rdt:#791F1F;
+  --gy:#888780;--gyb:#F1EFE8;--gyt:#444441;
+  --teal:#0F6E56;--tealb:#E0F2EE;
+  --r:8px;--rl:12px;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--tx);background:var(--bg)}
-.hdr{padding:14px 20px 10px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--bg);z-index:10}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.hdr h1{font-size:17px;font-weight:700;color:var(--tx)}
-.hdr-sub{font-size:11px;color:var(--tx3);margin-top:2px}
-.cfg-banner{background:var(--amb);border:1px solid #FAC775;border-radius:var(--r);padding:10px 14px;margin:10px 20px;font-size:12px;color:var(--amt);display:none}
-.cfg-banner strong{font-weight:700}
-.cfg-banner input{width:100%;margin-top:6px;padding:6px 9px;border-radius:var(--r);border:1px solid #FAC775;font-size:12px;font-family:monospace;background:#fff}
-.cfg-banner .cfg-btns{display:flex;gap:6px;margin-top:8px}
-.tabs{display:flex;border-bottom:1px solid var(--bd);padding:0 20px;background:var(--bg)}
-.tab{padding:9px 15px;cursor:pointer;font-size:13px;border-bottom:2px solid transparent;color:var(--tx2);transition:all .15s}
-.tab.on{color:var(--pu);border-bottom-color:var(--pu);font-weight:700}
-.tab:hover{color:var(--tx)}
-.pnl{display:none;padding:14px 20px}.pnl.on{display:block}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.stat{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r);padding:10px 13px}
-.stat-lbl{font-size:11px;color:var(--tx3);margin-bottom:3px}
-.stat-val{font-size:20px;font-weight:700}
-.ctrls{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
-.ctrls select{font-size:12px;padding:4px 8px;height:30px;border-radius:var(--r);border:1px solid var(--bd2);background:var(--bg);color:var(--tx);cursor:pointer}
-.btn{padding:4px 13px;height:30px;font-size:12px;border-radius:var(--r);cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-weight:600;transition:all .15s}
-.btn-p{background:var(--pu);color:#fff;border:none}.btn-p:hover{background:var(--put)}
-.btn-g{background:var(--bg);color:var(--tx);border:1px solid var(--bd2)}.btn-g:hover{background:var(--bg2)}
-.btn-danger{background:var(--bg);color:var(--rd);border:1px solid var(--rdb)}.btn-danger:hover{background:var(--rdb)}
-.btn-sm{height:26px;font-size:11px;padding:2px 10px}
-.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;font-size:11px;color:var(--tx3);align-items:center}
-.ldot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:2px;vertical-align:middle}
-.alert-b{background:var(--amb);border:1px solid #FAC775;border-radius:var(--r);padding:9px 13px;margin-bottom:10px;font-size:12px;color:var(--amt);display:none}
-.tbl-wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--rl)}
-table.gt{border-collapse:collapse;min-width:100%;font-size:12px;background:var(--bg)}
-.gt th{background:var(--bg2);padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap;font-weight:700;font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.3px}
-.gt td{padding:5px 9px;border-bottom:1px solid var(--bd);vertical-align:middle}
-.gt tr:hover td{background:var(--bg2)}
-.ph-row td{background:var(--pub);color:var(--put);font-weight:700;padding:6px 10px}
+body{font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--tx);background:var(--bg2)}
+/* LAYOUT */
+.app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{background:var(--put);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px}
+.topbar h1{font-size:15px;font-weight:700;white-space:nowrap}
+.topbar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.conn-dot{width:8px;height:8px;border-radius:50%;background:#ccc;flex-shrink:0}
+.conn-dot.on{background:#4ade80}
+.conn-dot.off{background:#f87171}
+.nav{background:#fff;border-bottom:1px solid var(--bd);display:flex;overflow-x:auto;flex-shrink:0;padding:0 16px}
+.nav-item{padding:10px 14px;cursor:pointer;font-size:12px;font-weight:600;border-bottom:2px solid transparent;color:var(--tx3);white-space:nowrap;display:flex;align-items:center;gap:5px}
+.nav-item.on{color:var(--pu);border-bottom-color:var(--pu)}
+.nav-item:hover{color:var(--tx)}
+.content{flex:1;overflow-y:auto;padding:16px 20px}
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:var(--rl);padding:12px 14px;border-left:3px solid var(--pu)}
+.card-lbl{font-size:11px;color:var(--tx3);margin-bottom:4px;font-weight:500}
+.card-val{font-size:22px;font-weight:700}
+.card-sub{font-size:11px;color:var(--tx3);margin-top:2px}
+/* SECTION */
+.sec{font-size:14px;font-weight:700;margin:16px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-badge{font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;background:var(--pub);color:var(--pu)}
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--rl);background:#fff;margin-bottom:16px}
+table{border-collapse:collapse;min-width:100%;font-size:12px}
+th{background:var(--bg2);padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap;font-weight:700;font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.3px}
+td{padding:5px 9px;border-bottom:1px solid var(--bd);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+.ph-row td{background:var(--pub);font-weight:700;color:var(--put);padding:6px 10px}
+/* BADGES */
 .badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid transparent}
-.s-done{background:var(--gnb);color:var(--gn);border-color:#c0dd97}
+.s-done{background:var(--gnb);color:var(--gnt);border-color:#c0dd97}
 .s-doing{background:var(--blb);color:var(--blt);border-color:#b5d4f4}
 .s-pending{background:var(--amb);color:var(--amt);border-color:#FAC775}
 .s-todo{background:var(--gyb);color:var(--gyt);border-color:var(--bd2)}
 .s-blocked{background:var(--rdb);color:var(--rdt);border-color:#f7c1c1}
-.pb{height:6px;background:var(--bd);border-radius:3px;width:60px;overflow:hidden;display:inline-block;vertical-align:middle}
-.pbf{height:100%;border-radius:3px;background:var(--pu)}
+.s-open{background:var(--rdb);color:var(--rdt);border-color:#f7c1c1}
+.s-resolved{background:var(--gnb);color:var(--gnt);border-color:#c0dd97}
+.s-investigating{background:var(--amb);color:var(--amt);border-color:#FAC775}
+/* RACI */
 .tr{display:inline-block;background:var(--amb);color:var(--amt);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
 .ta{display:inline-block;background:var(--rdb);color:var(--rdt);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
-.tc{display:inline-block;background:var(--gnb);color:var(--gn);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
+.tc{display:inline-block;background:var(--gnb);color:var(--gnt);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
 .ti{display:inline-block;background:var(--blb);color:var(--blt);padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px 0}
-.raci-cell{min-width:155px;line-height:1.9}
+.raci-cell{min-width:150px;line-height:1.9}
+/* PROGRESS */
+.pb{height:6px;background:var(--bd);border-radius:3px;width:60px;overflow:hidden;display:inline-block;vertical-align:middle}
+.pbf{height:100%;border-radius:3px;background:var(--pu)}
+/* BAR CHART */
+.bar-cell{min-width:260px;padding:4px 9px}
+.bwrap{position:relative;height:14px}
+.bar{position:absolute;height:10px;top:2px;border-radius:2px;min-width:3px}
+/* BUTTONS */
+.btn{padding:4px 12px;height:28px;font-size:12px;border-radius:var(--r);cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-weight:600;transition:all .15s;white-space:nowrap}
+.btn-p{background:var(--pu);color:#fff;border:none}.btn-p:hover{opacity:.9}
+.btn-g{background:#fff;color:var(--tx);border:1px solid var(--bd2)}.btn-g:hover{background:var(--bg2)}
+.btn-danger{background:#fff;color:var(--rd);border:1px solid var(--rdb)}.btn-danger:hover{background:var(--rdb)}
+.btn-sm{height:24px;font-size:11px;padding:2px 8px}
+.btn-white{background:#fff;color:var(--put);border:none;font-weight:700}
+/* CONTROLS */
+.ctrls{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.ctrls select,.ctrls input[type=text]{font-size:12px;padding:4px 8px;height:28px;border-radius:var(--r);border:1px solid var(--bd2);background:#fff;color:var(--tx)}
+/* FORM */
+.form-panel{background:#fff;border:1px solid var(--bd2);border-left:3px solid var(--pu);border-radius:0 var(--rl) var(--rl) 0;padding:14px 16px;margin-bottom:12px}
+.form-panel h4{font-size:13px;font-weight:700;margin-bottom:12px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fg-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.fg-full{grid-column:1/-1}
+.fl{font-size:11px;color:var(--tx3);margin-bottom:3px;font-weight:600}
+.fi{width:100%;padding:6px 9px;border-radius:var(--r);font-size:12px;border:1px solid var(--bd2);background:#fff;color:var(--tx)}
+.fi:focus{outline:none;border-color:var(--pu);box-shadow:0 0 0 2px rgba(83,74,183,.1)}
+textarea.fi{min-height:60px;resize:vertical}
+.fsec{font-size:11px;font-weight:700;color:var(--tx3);margin:12px 0 6px;letter-spacing:.4px;text-transform:uppercase}
+.fact{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+/* ALERTS */
+.alert{border-radius:var(--r);padding:10px 14px;margin-bottom:10px;font-size:12px;font-weight:500;display:flex;gap:8px;align-items:flex-start}
+.alert-warn{background:var(--amb);border:1px solid #FAC775;color:var(--amt)}
+.alert-err{background:var(--rdb);border:1px solid #f7c1c1;color:var(--rdt)}
+.alert-ok{background:var(--gnb);border:1px solid #c0dd97;color:var(--gnt)}
+.alert-info{background:var(--blb);border:1px solid #b5d4f4;color:var(--blt)}
+/* KPI progress ring */
+.kpi-card{background:#fff;border:1px solid var(--bd);border-radius:var(--rl);padding:14px;text-align:center}
+.kpi-pct{font-size:26px;font-weight:700}
+.kpi-lbl{font-size:11px;color:var(--tx3);margin-top:4px}
+.kpi-target{font-size:11px;color:var(--tx3)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+/* LEGEND */
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;font-size:11px;color:var(--tx3);align-items:center}
+.ldot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:2px;vertical-align:middle}
+/* NAME */
+.name-en{font-weight:500}
 .name-vi{font-size:11px;color:var(--tx3);margin-top:1px}
-.bar-cell{min-width:280px;padding:4px 9px}
-.bwrap{position:relative;height:16px}
-.bar{position:absolute;height:12px;top:2px;border-radius:3px;min-width:3px}
-.ep{background:var(--bg2);border:1px solid var(--bd2);border-left:3px solid var(--pu);border-radius:0 var(--rl) var(--rl) 0;padding:14px 16px;margin:2px 0 6px}
-.ep h4{font-size:13px;font-weight:700;margin-bottom:12px;color:var(--tx)}
-.ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ep-full{grid-column:1/-1}
-.ep-lbl{font-size:11px;color:var(--tx3);margin-bottom:3px;font-weight:600}
-.ep-input{width:100%;padding:6px 9px;border-radius:var(--r);font-size:12px;border:1px solid var(--bd2);background:var(--bg);color:var(--tx)}
-.ep-input:focus{outline:none;border-color:var(--pu);box-shadow:0 0 0 2px rgba(83,74,183,.1)}
-.ep-section{font-size:11px;font-weight:700;color:var(--tx3);margin:12px 0 6px;letter-spacing:.4px;text-transform:uppercase}
-.ep-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.rt{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
-.rt th{background:var(--bg2);padding:7px 10px;border-bottom:1px solid var(--bd);font-weight:700;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--tx2)}
-.rt td{padding:7px 10px;border-bottom:1px solid var(--bd);vertical-align:top}
-.rt tr:last-child td{border-bottom:none}
-.sec{font-size:14px;font-weight:700;margin:16px 0 8px;color:var(--tx)}
-.pbar-wrap{margin-bottom:10px}
-.issue-item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border:1px solid var(--bd);border-radius:var(--r);margin-bottom:5px}
-.chg-item{padding:9px 13px;border-left:3px solid var(--pu);background:var(--bg2);border-radius:0 var(--r) var(--r) 0;margin-bottom:6px}
-.loading{text-align:center;padding:40px;color:var(--tx3);font-size:13px}
-.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--pu);border-radius:50%;animation:spin .7s linear infinite;margin-right:8px;vertical-align:middle}
+/* LOADING */
+.loading{text-align:center;padding:40px;color:var(--tx3)}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--bd);border-top-color:var(--pu);border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
-.online-badge{background:var(--gnb);color:var(--gn);padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700}
-.offline-badge{background:var(--gyb);color:var(--gyt);padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700}
-@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.ep-grid{grid-template-columns:1fr}.ep-full{grid-column:1}}
+/* COST */
+.cost-pos{color:var(--gnt);font-weight:700}
+.cost-neg{color:var(--rdt);font-weight:700}
+/* PERM TOGGLE */
+.tgl{position:relative;display:inline-block;width:36px;height:20px}
+.tgl input{opacity:0;width:0;height:0}
+.sld{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--bd2);border-radius:10px;transition:.3s}
+.sld:before{position:absolute;content:"";height:14px;width:14px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+input:checked+.sld{background:var(--pu)}
+input:checked+.sld:before{transform:translateX(16px)}
+.perm-row{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border:1px solid var(--bd);border-radius:var(--r);margin-bottom:6px;background:#fff}
+/* CFG PANEL */
+.cfg-panel{background:var(--amb);border:1px solid #FAC775;border-radius:var(--r);padding:12px 16px;margin-bottom:12px;display:none}
+.cfg-panel input{width:100%;margin-top:6px;padding:6px 9px;border-radius:var(--r);font-size:12px;font-family:monospace;border:1px solid #FAC775;background:#fff}
+/* RESPONSIVE */
+@media(max-width:700px){.fg,.fg-3{grid-template-columns:1fr}.fg-full{grid-column:1}.cards{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+<div class="app">
 
-<div class="hdr">
-  <div class="hdr-top">
-    <div>
-      <h1>📋 Master Plan – GoodFood × Lineage Bắc Ninh</h1>
-      <div class="hdr-sub">Bắt đầu: 08/06/2026 · <span id="task-count">...</span> tasks · 6 giai đoạn · <span id="conn-badge" class="offline-badge">⚙️ Chưa cấu hình</span></div>
-    </div>
-    <button class="btn btn-g btn-sm" onclick="toggleConfig()">⚙️ Cài đặt API</button>
+<!-- TOP BAR -->
+<div class="topbar">
+  <h1>📦 GoodFood × Lineage – Operations Hub</h1>
+  <div class="topbar-right">
+    <span class="conn-dot" id="conn-dot"></span>
+    <span id="conn-lbl" style="font-size:11px;opacity:.8">Chưa kết nối</span>
+    <button class="btn btn-white btn-sm" onclick="toggleCfg()">⚙️ API</button>
   </div>
 </div>
 
-<div id="cfg-banner" class="cfg-banner">
-  <strong>⚙️ Cấu hình Google Sheets API</strong><br>
-  Dán URL Deployment của Apps Script vào đây (xem hướng dẫn trong file <code>AppScript_MasterPlan.js</code>)
-  <input type="text" id="api-url-input" placeholder="https://script.google.com/macros/s/AKfyc.../exec" />
-  <div class="cfg-btns">
-    <button class="btn btn-p btn-sm" onclick="saveApiUrl()">💾 Lưu & kết nối</button>
-    <button class="btn btn-g btn-sm" onclick="toggleConfig()">Đóng</button>
-    <button class="btn btn-danger btn-sm" onclick="clearApiUrl()">Xoá URL</button>
+<!-- CFG PANEL -->
+<div id="cfg-panel" class="cfg-panel" style="margin:0;border-radius:0;padding:10px 20px">
+  <strong style="font-size:12px">⚙️ Google Sheets API URL</strong>
+  <input type="text" id="api-input" placeholder="https://script.google.com/macros/s/AKfyc.../exec"/>
+  <div style="display:flex;gap:6px;margin-top:8px">
+    <button class="btn btn-p btn-sm" onclick="saveApi()">💾 Lưu & kết nối</button>
+    <button class="btn btn-g btn-sm" onclick="toggleCfg()">Đóng</button>
+    <button class="btn btn-danger btn-sm" onclick="clearApi()">Xoá</button>
   </div>
 </div>
 
-<div class="tabs">
-  <div class="tab on" onclick="go('gantt',this)">Gantt Chart</div>
-  <div class="tab" onclick="go('raci',this)">RACI Matrix</div>
-  <div class="tab" onclick="go('report',this)">Báo cáo tiến độ</div>
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-item on" onclick="nav('dashboard',this)">🏠 Dashboard</div>
+  <div class="nav-item" onclick="nav('daily',this)">📋 Daily Ops</div>
+  <div class="nav-item" onclick="nav('incidents',this)">🚨 Sự cố / Đơn rớt</div>
+  <div class="nav-item" onclick="nav('kpi',this)">📊 KPI</div>
+  <div class="nav-item" onclick="nav('costs',this)">💰 Chi phí</div>
+  <div class="nav-item" onclick="nav('gantt',this)">📅 Master Plan</div>
+  <div class="nav-item" onclick="nav('raci',this)">🔀 RACI</div>
+  <div class="nav-item" onclick="nav('settings',this)">⚙️ Cài đặt</div>
 </div>
 
-<div id="pnl-gantt" class="pnl on">
-  <div class="stats" id="sb"></div>
-  <div id="alert-b" class="alert-b"></div>
-  <div class="ctrls">
-    <select id="pf" onchange="fPhase(this.value)">
-      <option value="all">Tất cả giai đoạn</option>
-      <option value="A">A – Overview (Tổng quan)</option>
-      <option value="B">B – Trial (Thử nghiệm)</option>
-      <option value="C">C – Handover FS1 (Bàn giao kênh 1)</option>
-      <option value="D">D – Handover FS2 (Bàn giao kênh 2)</option>
-      <option value="E">E – Handover FS3 (Bàn giao kênh 3)</option>
-      <option value="F">F – Summary (Tổng kết)</option>
-    </select>
-    <select id="sf" onchange="fStatus(this.value)">
-      <option value="all">Tất cả trạng thái</option>
-      <option value="done">✅ Done – Hoàn thành</option>
-      <option value="doing">🔵 Đang thực hiện</option>
-      <option value="pending">⏳ Pending – Chờ xử lý</option>
-      <option value="todo">⬜ Chưa bắt đầu</option>
-      <option value="blocked">🔴 Blocked – Bị chặn</option>
-    </select>
-    <button class="btn btn-p" onclick="addTask()">+ Thêm task</button>
-    <button class="btn btn-g" onclick="refreshData()">🔄 Tải lại</button>
-  </div>
-  <div class="legend">
-    <span><span class="ldot" style="background:#27500A"></span>Done</span>
-    <span><span class="ldot" style="background:#185FA5"></span>Đang thực hiện</span>
-    <span><span class="ldot" style="background:#BA7517"></span>Pending</span>
-    <span><span class="ldot" style="background:#888780"></span>Chưa bắt đầu</span>
-    <span><span class="ldot" style="background:#A32D2D"></span>Blocked</span>
-    &nbsp;|&nbsp;
-    <span><span class="tr">R</span> Thực hiện</span>
-    <span><span class="ta">A</span> Chịu trách nhiệm</span>
-    <span><span class="tc">C</span> Tham vấn</span>
-    <span><span class="ti">I</span> Thông báo</span>
-  </div>
-  <div id="gantt-loading" class="loading"><span class="spinner"></span>Đang tải dữ liệu...</div>
-  <div class="tbl-wrap" id="gantt-table-wrap" style="display:none">
-    <table class="gt">
-      <thead><tr>
-        <th style="width:28px">TT</th>
-        <th style="min-width:200px">Công việc</th>
-        <th style="width:30px">GF</th>
-        <th style="width:30px">LN</th>
-        <th>Trạng thái</th>
-        <th>% HT</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>R / A / C / I</th>
-        <th style="min-width:280px">Timeline (Jun–Aug 2026)</th>
-        <th style="width:70px">Edit</th>
-      </tr></thead>
-      <tbody id="gb"></tbody>
-    </table>
-  </div>
+<!-- CONTENT -->
+<div class="content" id="content">
+  <div class="loading"><span class="spinner"></span>Đang tải...</div>
 </div>
 
-<div id="pnl-raci" class="pnl"><div id="raci-content"></div></div>
-
-<div id="pnl-report" class="pnl">
-  <div class="stats" id="rsb"></div>
-  <div class="sec">Tiến độ theo giai đoạn</div>
-  <div id="phase-prog"></div>
-  <div class="sec">Mục Pending / Blocked cần xử lý</div>
-  <div id="issue-list"></div>
-  <div class="sec">Log thay đổi</div>
-  <div id="chg-log"></div>
-</div>
+</div><!-- .app -->
 
 <script>
+// ===== CONFIG =====
 const S0=new Date('2026-06-08'),TDAYS=90;
 const PC={A:'#534AB7',B:'#185FA5',C:'#0F6E56',D:'#BA7517',E:'#993C1D',F:'#A32D2D'};
-const PN={A:'Overview – Tổng quan',B:'Trial – Thử nghiệm',C:'Handover FS1 – Bàn giao kênh 1',D:'Handover FS2 – Bàn giao kênh 2',E:'Handover FS3 – Bàn giao kênh 3',F:'Summary – Tổng kết'};
+const PN={A:'Overview – Tổng quan',B:'Trial – Thử nghiệm',C:'Handover FS1',D:'Handover FS2',E:'Handover FS3',F:'Summary – Tổng kết'};
 const SC={done:'#27500A',doing:'#185FA5',pending:'#BA7517',todo:'#888780',blocked:'#A32D2D'};
 const SL={done:'✅ Done',doing:'🔵 Đang thực hiện',pending:'⏳ Pending',todo:'⬜ Chưa bắt đầu',blocked:'🔴 Blocked'};
 const SS={done:'s-done',doing:'s-doing',pending:'s-pending',todo:'s-todo',blocked:'s-blocked'};
+const ITypes={'late_delivery':'Giao trễ','wrong_item':'Sai hàng','damage':'Hàng hỏng','temp_issue':'Lỗi nhiệt độ','shortage':'Thiếu hàng','doc_error':'Sai chứng từ','other':'Khác'};
+const IStatus={'open':'🔴 Mở','investigating':'🟡 Đang xử lý','resolved':'✅ Đã xử lý'};
 
-let tasks=[],changes=[],openId=null,fpv='all',fsv='all';
-let API_URL = localStorage.getItem('gf-api-url') || '';
+let API='',data={tasks:[],incidents:[],daily:[],kpi:[],costs:[],changes:[]};
+let openEdit=null,curPage='dashboard';
 
-// ---- CONFIG ----
-function toggleConfig(){
-  const b=document.getElementById('cfg-banner');
-  b.style.display = b.style.display==='none'||!b.style.display ? 'block' : 'none';
-  if(b.style.display==='block') document.getElementById('api-url-input').value=API_URL;
-}
-function saveApiUrl(){
-  API_URL = document.getElementById('api-url-input').value.trim();
-  localStorage.setItem('gf-api-url', API_URL);
-  toggleConfig();
-  loadData();
-}
-function clearApiUrl(){
-  API_URL=''; localStorage.removeItem('gf-api-url');
-  updateBadge(false); toggleConfig();
-}
-function updateBadge(online){
-  const b=document.getElementById('conn-badge');
-  if(online){b.className='online-badge';b.textContent='🟢 Online – Google Sheets';}
-  else{b.className='offline-badge';b.textContent=API_URL?'🔴 Lỗi kết nối':'⚙️ Chưa cấu hình API';}
+// ===== API =====
+function loadApi(){API=localStorage.getItem('gf-api-v2')||'';updateConn();}
+function saveApi(){API=document.getElementById('api-input').value.trim();localStorage.setItem('gf-api-v2',API);toggleCfg();loadAll();}
+function clearApi(){API='';localStorage.removeItem('gf-api-v2');updateConn();}
+function toggleCfg(){const p=document.getElementById('cfg-panel');p.style.display=p.style.display==='block'?'none':'block';if(p.style.display==='block')document.getElementById('api-input').value=API;}
+function updateConn(ok){
+  const d=document.getElementById('conn-dot'),l=document.getElementById('conn-lbl');
+  if(ok===true){d.className='conn-dot on';l.textContent='🟢 Google Sheets';}
+  else if(ok===false){d.className='conn-dot off';l.textContent='🔴 Lỗi kết nối';}
+  else{d.className='conn-dot';l.textContent=API?'Đang kết nối...':'Chưa cấu hình API';}
 }
 
-// ---- API ----
-async function api(params={}, body=null){
-  if(!API_URL) throw new Error('no-api');
-  const url = API_URL + (body ? '' : '?'+new URLSearchParams(params));
-  const opts = body ? {method:'POST',body:JSON.stringify(body)} : {};
-  const r = await fetch(url, opts);
+async function apiFetch(action){
+  if(!API)throw new Error('no-api');
+  const r=await fetch(API+'?action='+action);
+  return r.json();
+}
+async function apiPost(body){
+  if(!API)throw new Error('no-api');
+  const r=await fetch(API,{method:'POST',body:JSON.stringify(body)});
   return r.json();
 }
 
-async function loadData(){
-  document.getElementById('gantt-loading').style.display='block';
-  document.getElementById('gantt-table-wrap').style.display='none';
-  if(!API_URL){
-    // fallback localStorage
-    try{const d=localStorage.getItem('gf-tasks');if(d)tasks=JSON.parse(d);}catch(e){}
-    try{const d=localStorage.getItem('gf-changes');if(d)changes=JSON.parse(d);}catch(e){}
-    if(!tasks.length) tasks=getDefaultTasks();
-    updateBadge(false);
-    finishLoad();
-    return;
-  }
+function fromLS(key,def){try{const d=localStorage.getItem(key);return d?JSON.parse(d):def;}catch(e){return def;}}
+function toLS(key,val){try{localStorage.setItem(key,JSON.stringify(val));}catch(e){}}
+
+async function loadAll(){
+  updateConn();
+  // load from localStorage first for instant render
+  data.tasks=fromLS('gf2-tasks',[]);
+  data.incidents=fromLS('gf2-incidents',[]);
+  data.daily=fromLS('gf2-daily',[]);
+  data.kpi=fromLS('gf2-kpi',[]);
+  data.costs=fromLS('gf2-costs',[]);
+  data.changes=fromLS('gf2-changes',[]);
+  if(!data.tasks.length)data.tasks=defaultTasks();
+  renderCurrent();
+
+  if(!API)return;
   try{
-    const [t,c] = await Promise.all([
-      api({action:'getTasks'}),
-      api({action:'getChanges'})
+    const [t,i,d2,k,c,ch]=await Promise.all([
+      apiFetch('getTasks'),apiFetch('getIncidents'),
+      apiFetch('getDailyOps'),apiFetch('getKPI'),
+      apiFetch('getCosts'),apiFetch('getChanges')
     ]);
-    tasks = Array.isArray(t) ? t.map(normalizeTask) : getDefaultTasks();
-    changes = Array.isArray(c) ? c : [];
-    // convert numeric fields
-    tasks.forEach(t=>{t.pct=parseInt(t.pct)||0;t.gf=t.gf==1||t.gf==='1'||t.gf===true?1:0;t.ln=t.ln==1||t.ln==='1'||t.ln===true?1:0;});
-    updateBadge(true);
-  } catch(e){
-    console.error(e);
-    try{const d=localStorage.getItem('gf-tasks');if(d)tasks=JSON.parse(d);}catch(e2){}
-    if(!tasks.length) tasks=getDefaultTasks();
-    updateBadge(false);
-  }
-  finishLoad();
+    if(Array.isArray(t)&&t.length){data.tasks=t.map(normalizeTask);toLS('gf2-tasks',data.tasks);}
+    if(Array.isArray(i)){data.incidents=i;toLS('gf2-incidents',i);}
+    if(Array.isArray(d2)){data.daily=d2;toLS('gf2-daily',d2);}
+    if(Array.isArray(k)){data.kpi=k;toLS('gf2-kpi',k);}
+    if(Array.isArray(c)){data.costs=c;toLS('gf2-costs',c);}
+    if(Array.isArray(ch)){data.changes=ch;toLS('gf2-changes',ch);}
+    updateConn(true);
+  }catch(e){updateConn(false);}
+  renderCurrent();
 }
 
-function finishLoad(){
-  document.getElementById('gantt-loading').style.display='none';
-  document.getElementById('gantt-table-wrap').style.display='block';
-  document.getElementById('task-count').textContent=tasks.length;
-  renderGantt();
+async function saveRow(sheet,row){
+  toLS('gf2-'+sheet.toLowerCase(),data[sheet.toLowerCase()]);
+  if(API)try{await apiPost({action:'saveRow',sheet,row});}catch(e){}
+}
+async function deleteRow(sheet,id){
+  toLS('gf2-'+sheet.toLowerCase(),data[sheet.toLowerCase()]);
+  if(API)try{await apiPost({action:'deleteRow',sheet,id});}catch(e){}
 }
 
-async function saveTask(task){
-  // save locally always
-  localStorage.setItem('gf-tasks',JSON.stringify(tasks));
-  if(API_URL){
-    try{await api({},{action:'saveTask',task});}catch(e){}
-  }
-}
-async function saveChange(change){
-  changes.push(change);
-  localStorage.setItem('gf-changes',JSON.stringify(changes));
-  if(API_URL){
-    try{await api({},{action:'addChange',change});}catch(e){}
-  }
-}
-async function deleteTaskRemote(id){
-  tasks=tasks.filter(x=>x.id!==id);
-  localStorage.setItem('gf-tasks',JSON.stringify(tasks));
-  if(API_URL){
-    try{await api({},{action:'deleteTask',id});}catch(e){}
-  }
-}
-
-function refreshData(){loadData();}
-function normalizeTask(t){return{id:t.id,ph:t.ph,tt:t.tt,name:t.name||'',name_vi:t.name_vi||'',gf:t.gf,ln:t.ln,st:t.st||'todo',pct:parseInt(t.pct)||0,s:t.s||'2026-06-08',e:t.e||'2026-06-08',os:t.os||t.s||'2026-06-08',oe:t.oe||t.e||'2026-06-08',r:t.r||'',a:t.a||'',c:t.c||'',i:t.i||'BLD GF'};}
-
-// ---- RENDER ----
-function go(t,el){
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-  document.querySelectorAll('.pnl').forEach(x=>x.classList.remove('on'));
-  el.classList.add('on');document.getElementById('pnl-'+t).classList.add('on');
-  if(t==='raci')renderRaci();if(t==='report')renderReport();
-}
+function normalizeTask(t){return{id:t.id,ph:t.ph,tt:t.tt,name:t.name||'',name_vi:t.name_vi||'',gf:+t.gf||0,ln:+t.ln||0,st:t.st||'todo',pct:+t.pct||0,s:t.s||'2026-06-08',e:t.e||'2026-06-08',os:t.os||t.s||'2026-06-08',oe:t.oe||t.e||'2026-06-08',r:t.r||'',a:t.a||'',c:t.c||'',i:t.i||'BLD GF'};}
+function nextId(arr){return(Math.max(0,...arr.map(x=>+x.id||0))+1);}
+function today(){return new Date().toISOString().slice(0,10);}
+function todayVi(){return new Date().toLocaleDateString('vi-VN');}
 function doff(ds){return Math.round((new Date(ds)-S0)/86400000);}
-function fmt(ds){const d=new Date(ds);return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0');}
-function fPhase(v){fpv=v;openId=null;renderGantt();}
-function fStatus(v){fsv=v;openId=null;renderGantt();}
+function fmt(ds){if(!ds)return'';const d=new Date(ds);return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0');}
+function fmtFull(ds){if(!ds)return'';const d=new Date(ds);return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear();}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-function raciCell(t){
-  return `<div class="raci-cell">
-    <div><span class="tr">R</span> ${t.r}</div>
-    <div><span class="ta">A</span> ${t.a}</div>
-    <div><span class="tc">C</span> ${t.c}</div>
-    <div><span class="ti">I</span> ${t.i}</div>
-  </div>`;
+// ===== NAV =====
+function nav(page,el){
+  document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');curPage=page;openEdit=null;renderCurrent();
+}
+function renderCurrent(){
+  const fn={dashboard:renderDashboard,daily:renderDaily,incidents:renderIncidents,kpi:renderKPI,costs:renderCosts,gantt:renderGantt,raci:renderRaci,settings:renderSettings};
+  if(fn[curPage])fn[curPage]();
 }
 
-function renderGantt(){
-  const filtered=tasks.filter(t=>(fpv==='all'||t.ph===fpv)&&(fsv==='all'||t.st===fsv));
-  let html='',lastPh='';
-  filtered.forEach(t=>{
-    if(t.ph!==lastPh){
-      lastPh=t.ph;
-      html+=`<tr class="ph-row"><td colspan="11"><span style="background:${PC[t.ph]};color:#fff;padding:1px 10px;border-radius:9px;font-size:11px;margin-right:7px;font-weight:700">${t.ph}</span>${PN[t.ph]}</td></tr>`;
-    }
-    const so=doff(t.s),eo=doff(t.e),dur=Math.max(1,eo-so+1);
-    const lft=Math.max(0,(so/TDAYS)*100).toFixed(2);
-    const wid=Math.min(100-parseFloat(lft),(dur/TDAYS)*100).toFixed(2);
-    let orig='';
-    if(t.os!==t.s||t.oe!==t.e){
-      const ol=Math.max(0,(doff(t.os)/TDAYS)*100).toFixed(2);
-      const ow=Math.min(100-parseFloat(ol),(Math.max(1,doff(t.oe)-doff(t.os)+1)/TDAYS)*100).toFixed(2);
-      orig=`<div class="bar" style="left:${ol}%;width:${ow}%;background:#534AB7;opacity:.22"></div>`;
-    }
-    const isOpen=openId===t.id;
+// ===== DASHBOARD =====
+function renderDashboard(){
+  const tasks=data.tasks,inc=data.incidents,ops=data.daily;
+  const done=tasks.filter(t=>t.st==='done').length;
+  const prog=tasks.length?Math.round(tasks.reduce((s,t)=>s+(+t.pct||0),0)/tasks.length):0;
+  const openInc=inc.filter(i=>i.status==='open'||i.status==='investigating').length;
+  const todayOps=ops.filter(o=>o.date===today());
+  const thisWeekInc=inc.filter(i=>{const d=new Date(i.date);const now=new Date();return(now-d)/86400000<=7;});
+  const totalCostDiff=data.costs.reduce((s,c)=>s+(+c.diff||0),0);
+
+  // KPI summary from latest week
+  const latestKPI=data.kpi.sort((a,b)=>String(b.week).localeCompare(String(a.week)))[0];
+
+  let html=`
+  <div id="dash-alert"></div>
+  <div class="cards">
+    <div class="card" style="border-left-color:#534AB7">
+      <div class="card-lbl">📅 Tiến độ dự án</div>
+      <div class="card-val" style="color:#534AB7">${prog}%</div>
+      <div class="card-sub">${done}/${tasks.length} tasks hoàn thành</div>
+    </div>
+    <div class="card" style="border-left-color:${openInc>0?'#A32D2D':'#27500A'}">
+      <div class="card-lbl">🚨 Sự cố đang mở</div>
+      <div class="card-val" style="color:${openInc>0?'#A32D2D':'#27500A'}">${openInc}</div>
+      <div class="card-sub">${thisWeekInc.length} sự cố tuần này</div>
+    </div>
+    <div class="card" style="border-left-color:#185FA5">
+      <div class="card-lbl">📊 OTIF tuần này</div>
+      <div class="card-val" style="color:#185FA5">${latestKPI?Math.round(+latestKPI.otif_actual||0)+'%':'—'}</div>
+      <div class="card-sub">Target: ${latestKPI?latestKPI.otif_target||'95':'95'}%</div>
+    </div>
+    <div class="card" style="border-left-color:${totalCostDiff<0?'#A32D2D':'#27500A'}">
+      <div class="card-lbl">💰 Chi phí phát sinh</div>
+      <div class="card-val" style="color:${totalCostDiff<0?'#A32D2D':'#0F6E56'}">${totalCostDiff<0?'▲':''}${Math.abs(Math.round(totalCostDiff/1000))}K</div>
+      <div class="card-sub">So với hợp đồng</div>
+    </div>
+  </div>
+
+  <div class="sec">🚨 Sự cố đang mở <span class="sec-badge">${openInc}</span></div>`;
+
+  const openList=inc.filter(i=>i.status==='open'||i.status==='investigating').slice(0,5);
+  if(!openList.length){html+=`<div class="alert alert-ok">✅ Không có sự cố nào đang mở</div>`;}
+  else{
+    html+=`<div class="tbl-wrap"><table><thead><tr><th>Ngày</th><th>Loại</th><th>Kênh</th><th>Mô tả</th><th>Trạng thái</th><th>Ảnh hưởng chi phí</th></tr></thead><tbody>`;
+    openList.forEach(i=>{
+      html+=`<tr><td>${fmtFull(i.date)}</td><td>${ITypes[i.type]||i.type}</td><td>${esc(i.channel)}</td><td style="max-width:200px;white-space:normal">${esc(i.desc)}</td><td><span class="badge s-${i.status||'open'}">${IStatus[i.status]||i.status}</span></td><td>${i.cost_impact?`<span class="cost-neg">-${Number(i.cost_impact).toLocaleString()}đ</span>`:'-'}</td></tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  }
+
+  html+=`<div class="sec">📋 Daily Ops hôm nay</div>`;
+  if(!todayOps.length){
+    html+=`<div class="alert alert-warn">⚠️ Chưa có báo cáo Daily Ops hôm nay (${fmtFull(today())})</div>
+    <button class="btn btn-p" onclick="nav('daily',document.querySelectorAll('.nav-item')[1])">+ Nhập báo cáo hôm nay</button>`;
+  } else {
+    const o=todayOps[0];
+    html+=`<div class="cards">
+      <div class="card" style="border-left-color:#0F6E56"><div class="card-lbl">Nhập hàng (cont)</div><div class="card-val">${o.inbound_actual||0}<span style="font-size:13px;color:var(--tx3)">/${o.inbound_cont||0}</span></div></div>
+      <div class="card" style="border-left-color:#185FA5"><div class="card-lbl">Xuất hàng (tấn)</div><div class="card-val">${o.outbound_actual||0}<span style="font-size:13px;color:var(--tx3)">/${o.outbound_ton||0}</span></div></div>
+      <div class="card" style="border-left-color:#A32D2D"><div class="card-lbl">Giao trễ (đơn)</div><div class="card-val" style="color:${(o.late_delivery||0)>0?'#A32D2D':'#27500A'}">${o.late_delivery||0}</div></div>
+      <div class="card" style="border-left-color:#BA7517"><div class="card-lbl">Hàng hỏng (kiện)</div><div class="card-val" style="color:${(o.damage_qty||0)>0?'#BA7517':'#27500A'}">${o.damage_qty||0}</div></div>
+    </div>`;
+  }
+
+  html+=`<div class="sec">📅 Tasks sắp đến hạn (7 ngày tới)</div>`;
+  const upcoming=tasks.filter(t=>{if(t.st==='done')return false;
+    const d=doff(t.e);return d>=0&&d<=7;
+  }).slice(0,6);
+  if(!upcoming.length){html+=`<p style="color:var(--tx3);font-size:13px">Không có task nào đến hạn trong 7 ngày tới</p>`;}
+  else{
+    html+=`<div class="tbl-wrap"><table><thead><tr><th>Phase</th><th>Công việc</th><th>Deadline</th><th>Trạng thái</th><th>R</th></tr></thead><tbody>`;
+    upcoming.forEach(t=>{
+      html+=`<tr><td><span style="background:${PC[t.ph]};color:#fff;padding:1px 8px;border-radius:8px;font-size:11px;font-weight:700">${t.ph}</span></td>
+        <td style="white-space:normal;max-width:220px"><div class="name-en">${esc(t.name)}</div><div class="name-vi">${esc(t.name_vi)}</div></td>
+        <td style="white-space:nowrap;font-weight:600;color:${doff(t.e)<=2?'#A32D2D':'#BA7517'}">${fmt(t.e)}</td>
+        <td><span class="badge ${SS[t.st]}">${SL[t.st]}</span></td>
+        <td style="font-size:11px">${esc(t.r)}</td></tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  }
+
+  document.getElementById('content').innerHTML=html;
+
+  // Alert if incidents open
+  if(openInc>0){
+    document.getElementById('dash-alert').innerHTML=`<div class="alert alert-err">🚨 Có <strong>${openInc} sự cố chưa xử lý</strong> — cần kiểm tra ngay!</div>`;
+  }
+}
+
+// ===== DAILY OPS =====
+function renderDaily(){
+  const isNew=openEdit==='new';
+  let html=`
+  <div class="sec">📋 Daily Operations Report <span class="sec-badge">Vận hành hàng ngày</span></div>
+  <div class="ctrls">
+    <button class="btn btn-p" onclick="openDailyForm('new')">+ Nhập báo cáo hôm nay</button>
+    <button class="btn btn-g" onclick="loadAll()">🔄 Tải lại</button>
+  </div>`;
+
+  if(isNew||typeof openEdit==='object'){
+    const e=typeof openEdit==='object'?openEdit:null;
+    html+=`<div class="form-panel">
+      <h4>${e?'✏️ Chỉnh sửa báo cáo':'📋 Nhập báo cáo vận hành ngày'}</h4>
+      <div class="fg">
+        <div><div class="fl">Ngày</div><input class="fi" type="date" id="d-date" value="${e?e.date:today()}"/></div>
+        <div><div class="fl">Người nhập</div><input class="fi" id="d-by" placeholder="Tên / vị trí" value="${esc(e?e.submitted_by:'')}"/></div>
+      </div>
+      <div class="fsec">📦 Nhập hàng (Inbound)</div>
+      <div class="fg">
+        <div><div class="fl">Số cont kế hoạch</div><input class="fi" type="number" id="d-inc" placeholder="0" value="${e?e.inbound_cont:0}"/></div>
+        <div><div class="fl">Số cont thực tế nhập được</div><input class="fi" type="number" id="d-ina" placeholder="0" value="${e?e.inbound_actual:0}"/></div>
+      </div>
+      <div class="fsec">🚚 Xuất hàng (Outbound)</div>
+      <div class="fg">
+        <div><div class="fl">Sản lượng kế hoạch (tấn)</div><input class="fi" type="number" id="d-outc" placeholder="0" value="${e?e.outbound_ton:0}"/></div>
+        <div><div class="fl">Sản lượng thực tế (tấn)</div><input class="fi" type="number" id="d-outa" placeholder="0" value="${e?e.outbound_actual:0}"/></div>
+      </div>
+      <div class="fsec">⚠️ Sự cố trong ngày</div>
+      <div class="fg-3">
+        <div><div class="fl">Đơn giao trễ (đơn)</div><input class="fi" type="number" id="d-late" placeholder="0" value="${e?e.late_delivery:0}"/></div>
+        <div><div class="fl">Hàng hỏng (kiện)</div><input class="fi" type="number" id="d-dmg" placeholder="0" value="${e?e.damage_qty:0}"/></div>
+        <div><div class="fl">Lỗi nhiệt độ (lần)</div><input class="fi" type="number" id="d-temp" placeholder="0" value="${e?e.temp_issue:0}"/></div>
+      </div>
+      <div class="fg" style="margin-top:8px">
+        <div class="fg-full"><div class="fl">Ghi chú / Sự cố khác</div><textarea class="fi" id="d-note" placeholder="Mô tả sự cố, điểm cần lưu ý...">${esc(e?e.note:'')}</textarea></div>
+      </div>
+      <div class="fact">
+        <button class="btn btn-p" onclick="saveDaily()">💾 Lưu báo cáo</button>
+        <button class="btn btn-g" onclick="openEdit=null;renderDaily()">Huỷ</button>
+        ${e?`<button class="btn btn-danger" onclick="delDaily('${e.id}')">🗑 Xoá</button>`:''}
+      </div>
+    </div>`;
+  }
+
+  const sorted=[...data.daily].sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  html+=`<div class="tbl-wrap"><table>
+    <thead><tr><th>Ngày</th><th>Nhập (cont)</th><th>Xuất (tấn)</th><th>Giao trễ</th><th>Hàng hỏng</th><th>Lỗi nhiệt độ</th><th>Người nhập</th><th>Ghi chú</th><th></th></tr></thead>
+    <tbody>`;
+  if(!sorted.length){html+=`<tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:20px">Chưa có dữ liệu. Nhấn "+ Nhập báo cáo" để bắt đầu.</td></tr>`;}
+  sorted.forEach(o=>{
+    const latePct=o.outbound_actual>0?Math.round((o.late_delivery||0)/o.outbound_actual*100):0;
     html+=`<tr>
-      <td style="color:#9c9c94;font-size:11px">${t.tt}</td>
-      <td style="white-space:normal;line-height:1.4;min-width:200px;max-width:260px">
-        <div style="font-weight:500">${t.name}</div>
-        ${t.name_vi?`<div class="name-vi">${t.name_vi}</div>`:''}
-      </td>
+      <td style="font-weight:600;white-space:nowrap">${fmtFull(o.date)}</td>
+      <td><span style="font-weight:700;color:${o.inbound_actual>=o.inbound_cont?'#27500A':'#A32D2D'}">${o.inbound_actual||0}</span><span style="color:var(--tx3)">/${o.inbound_cont||0}</span></td>
+      <td><span style="font-weight:700;color:${o.outbound_actual>=o.outbound_ton?'#27500A':'#A32D2D'}">${o.outbound_actual||0}</span><span style="color:var(--tx3)">/${o.outbound_ton||0}</span></td>
+      <td>${(o.late_delivery||0)>0?`<span class="badge s-blocked">${o.late_delivery}</span>`:`<span style="color:var(--gnt)">0 ✓</span>`}</td>
+      <td>${(o.damage_qty||0)>0?`<span class="badge s-pending">${o.damage_qty} kiện</span>`:`<span style="color:var(--gnt)">0 ✓</span>`}</td>
+      <td>${(o.temp_issue||0)>0?`<span class="badge s-pending">${o.temp_issue} lần</span>`:`<span style="color:var(--gnt)">0 ✓</span>`}</td>
+      <td style="font-size:11px;color:var(--tx3)">${esc(o.submitted_by)}</td>
+      <td style="max-width:180px;white-space:normal;font-size:11px;color:var(--tx2)">${esc(o.note)}</td>
+      <td><button class="btn btn-g btn-sm" onclick="openDailyForm(${JSON.stringify(o).replace(/"/g,'&quot;')})">✏️</button></td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  document.getElementById('content').innerHTML=html;
+}
+
+function openDailyForm(d){openEdit=d==='new'?'new':d;renderDaily();setTimeout(()=>document.getElementById('d-date')?.scrollIntoView({behavior:'smooth',block:'center'}),80);}
+async function saveDaily(){
+  const row={
+    id:typeof openEdit==='object'?openEdit.id:nextId(data.daily),
+    date:document.getElementById('d-date').value,
+    inbound_cont:document.getElementById('d-inc').value,
+    inbound_actual:document.getElementById('d-ina').value,
+    outbound_ton:document.getElementById('d-outc').value,
+    outbound_actual:document.getElementById('d-outa').value,
+    late_delivery:document.getElementById('d-late').value,
+    damage_qty:document.getElementById('d-dmg').value,
+    temp_issue:document.getElementById('d-temp').value,
+    note:document.getElementById('d-note').value,
+    submitted_by:document.getElementById('d-by').value,
+  };
+  const idx=data.daily.findIndex(x=>String(x.id)===String(row.id));
+  if(idx>=0)data.daily[idx]=row;else data.daily.push(row);
+  await saveRow('DailyOps',row);
+  openEdit=null;renderDaily();
+}
+async function delDaily(id){
+  if(!confirm('Xoá báo cáo này?'))return;
+  data.daily=data.daily.filter(x=>String(x.id)!==String(id));
+  await deleteRow('DailyOps',id);
+  openEdit=null;renderDaily();
+}
+
+// ===== INCIDENTS =====
+function renderIncidents(){
+  const isNew=openEdit==='new-inc';
+  let html=`
+  <div class="sec">🚨 Sự cố & Đơn hàng rớt <span class="sec-badge">Incident Tracker</span></div>
+  <div class="ctrls">
+    <button class="btn btn-p" onclick="openIncForm('new')">+ Ghi nhận sự cố mới</button>
+    <select onchange="renderIncidents()" id="inc-filter">
+      <option value="all">Tất cả trạng thái</option>
+      <option value="open">🔴 Đang mở</option>
+      <option value="investigating">🟡 Đang xử lý</option>
+      <option value="resolved">✅ Đã xử lý</option>
+    </select>
+    <select onchange="renderIncidents()" id="inc-type-filter">
+      <option value="all">Tất cả loại</option>
+      ${Object.entries(ITypes).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}
+    </select>
+  </div>`;
+
+  if(isNew||typeof openEdit==='object'&&openEdit._inc){
+    const e=typeof openEdit==='object'?openEdit:null;
+    html+=`<div class="form-panel">
+      <h4>${e?'✏️ Chỉnh sửa sự cố':'🚨 Ghi nhận sự cố / Đơn hàng rớt'}</h4>
+      <div class="fg">
+        <div><div class="fl">Ngày xảy ra</div><input class="fi" type="date" id="i-date" value="${e?e.date:today()}"/></div>
+        <div><div class="fl">Loại sự cố</div>
+          <select class="fi" id="i-type">
+            ${Object.entries(ITypes).map(([k,v])=>`<option value="${k}"${e&&e.type===k?' selected':''}>${v}</option>`).join('')}
+          </select>
+        </div>
+        <div><div class="fl">Kênh / Điểm giao (CH/ST/NPP)</div><input class="fi" id="i-channel" placeholder="VD: CH Hà Nội, NPP Miền Nam..." value="${esc(e?e.channel:'')}"/></div>
+        <div><div class="fl">Người báo cáo</div><input class="fi" id="i-reporter" placeholder="Tên / bộ phận" value="${esc(e?e.reported_by:'')}"/></div>
+        <div class="fg-full"><div class="fl">Mô tả chi tiết sự cố</div><textarea class="fi" id="i-desc" placeholder="Mô tả sự cố, số lượng ảnh hưởng, SKU...">${esc(e?e.desc:'')}</textarea></div>
+        <div><div class="fl">Trạng thái xử lý</div>
+          <select class="fi" id="i-status">
+            <option value="open"${!e||e.status==='open'?' selected':''}>🔴 Đang mở</option>
+            <option value="investigating"${e&&e.status==='investigating'?' selected':''}>🟡 Đang xử lý</option>
+            <option value="resolved"${e&&e.status==='resolved'?' selected':''}>✅ Đã xử lý</option>
+          </select>
+        </div>
+        <div><div class="fl">Ngày xử lý xong</div><input class="fi" type="date" id="i-resolved" value="${e?e.resolved_date:''}"/></div>
+        <div><div class="fl">Nguyên nhân gốc rễ (Root Cause)</div><input class="fi" id="i-cause" placeholder="VD: Booking trễ, xe thiếu, hàng lỗi..." value="${esc(e?e.root_cause:'')}"/></div>
+        <div><div class="fl">Ảnh hưởng chi phí (VNĐ)</div><input class="fi" type="number" id="i-cost" placeholder="0" value="${e?e.cost_impact:0}"/></div>
+      </div>
+      <div class="fact">
+        <button class="btn btn-p" onclick="saveInc()">💾 Lưu</button>
+        <button class="btn btn-g" onclick="openEdit=null;renderIncidents()">Huỷ</button>
+        ${e?`<button class="btn btn-danger" onclick="delInc('${e.id}')">🗑 Xoá</button>`:''}
+      </div>
+    </div>`;
+  }
+
+  const sf=document.getElementById('inc-filter')?.value||'all';
+  const tf=document.getElementById('inc-type-filter')?.value||'all';
+  let list=[...data.incidents].filter(i=>(sf==='all'||i.status===sf)&&(tf==='all'||i.type===tf)).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+
+  // Summary
+  const open=data.incidents.filter(i=>i.status==='open').length;
+  const inv=data.incidents.filter(i=>i.status==='investigating').length;
+  const res=data.incidents.filter(i=>i.status==='resolved').length;
+  const totalCost=data.incidents.reduce((s,i)=>s+(+i.cost_impact||0),0);
+  html+=`<div class="cards">
+    <div class="card" style="border-left-color:#A32D2D"><div class="card-lbl">🔴 Đang mở</div><div class="card-val" style="color:#A32D2D">${open}</div></div>
+    <div class="card" style="border-left-color:#BA7517"><div class="card-lbl">🟡 Đang xử lý</div><div class="card-val" style="color:#BA7517">${inv}</div></div>
+    <div class="card" style="border-left-color:#27500A"><div class="card-lbl">✅ Đã xử lý</div><div class="card-val" style="color:#27500A">${res}</div></div>
+    <div class="card" style="border-left-color:#993C1D"><div class="card-lbl">💰 Tổng chi phí phát sinh</div><div class="card-val" style="color:#993C1D;font-size:16px">${totalCost.toLocaleString()}đ</div></div>
+  </div>`;
+
+  html+=`<div class="tbl-wrap"><table>
+    <thead><tr><th>Ngày</th><th>Loại</th><th>Kênh / Điểm</th><th>Mô tả</th><th>Báo cáo bởi</th><th>Trạng thái</th><th>Nguyên nhân</th><th>Chi phí (VNĐ)</th><th></th></tr></thead>
+    <tbody>`;
+  if(!list.length){html+=`<tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:20px">Không có sự cố nào. Nhấn "+ Ghi nhận sự cố mới" để thêm.</td></tr>`;}
+  list.forEach(i=>{
+    html+=`<tr>
+      <td style="white-space:nowrap;font-weight:600">${fmtFull(i.date)}</td>
+      <td><span class="badge s-${i.status==='open'?'blocked':i.status==='resolved'?'done':'pending'}">${ITypes[i.type]||i.type}</span></td>
+      <td style="white-space:nowrap">${esc(i.channel)}</td>
+      <td style="max-width:200px;white-space:normal;font-size:11px">${esc(i.desc)}</td>
+      <td style="font-size:11px;color:var(--tx3)">${esc(i.reported_by)}</td>
+      <td><span class="badge s-${i.status==='open'?'blocked':i.status==='resolved'?'done':'pending'}">${IStatus[i.status]||i.status}</span></td>
+      <td style="max-width:150px;white-space:normal;font-size:11px;color:var(--tx2)">${esc(i.root_cause)}</td>
+      <td style="white-space:nowrap">${i.cost_impact&&+i.cost_impact>0?`<span class="cost-neg">-${Number(i.cost_impact).toLocaleString()}</span>`:'-'}</td>
+      <td><button class="btn btn-g btn-sm" onclick='editInc(${JSON.stringify(i).replace(/'/g,"&#39;")})'>✏️</button></td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  document.getElementById('content').innerHTML=html;
+}
+
+function openIncForm(d){openEdit=d==='new'?'new-inc':d;renderIncidents();setTimeout(()=>document.getElementById('i-date')?.scrollIntoView({behavior:'smooth',block:'center'}),80);}
+function editInc(obj){obj._inc=true;openEdit=obj;renderIncidents();}
+async function saveInc(){
+  const row={
+    _inc:true,
+    id:typeof openEdit==='object'&&openEdit.id?openEdit.id:nextId(data.incidents),
+    date:document.getElementById('i-date').value,
+    type:document.getElementById('i-type').value,
+    channel:document.getElementById('i-channel').value,
+    desc:document.getElementById('i-desc').value,
+    reported_by:document.getElementById('i-reporter').value,
+    status:document.getElementById('i-status').value,
+    resolved_date:document.getElementById('i-resolved').value,
+    root_cause:document.getElementById('i-cause').value,
+    cost_impact:document.getElementById('i-cost').value,
+  };
+  const idx=data.incidents.findIndex(x=>String(x.id)===String(row.id));
+  if(idx>=0)data.incidents[idx]=row;else data.incidents.push(row);
+  await saveRow('Incidents',row);
+  openEdit=null;renderIncidents();
+}
+async function delInc(id){
+  if(!confirm('Xoá sự cố này?'))return;
+  data.incidents=data.incidents.filter(x=>String(x.id)!==String(id));
+  await deleteRow('Incidents',id);
+  openEdit=null;renderIncidents();
+}
+
+// ===== KPI =====
+function renderKPI(){
+  let html=`
+  <div class="sec">📊 KPI Tracker – Theo dõi hiệu suất <span class="sec-badge">Weekly</span></div>
+  <div class="ctrls">
+    <button class="btn btn-p" onclick="openKPIForm('new')">+ Nhập KPI tuần này</button>
+  </div>`;
+
+  if(openEdit==='new-kpi'||typeof openEdit==='object'&&openEdit._kpi){
+    const e=typeof openEdit==='object'?openEdit:null;
+    html+=`<div class="form-panel">
+      <h4>${e?'✏️ Chỉnh sửa KPI':'📊 Nhập KPI tuần'}</h4>
+      <div class="fg">
+        <div><div class="fl">Tuần (VD: 2026-W24)</div><input class="fi" id="k-week" placeholder="2026-W24" value="${e?e.week:getWeek()}"/></div>
+        <div><div class="fl">Người nhập</div><input class="fi" id="k-note" placeholder="Ghi chú / người nhập" value="${esc(e?e.note:'')}"/></div>
+        <div><div class="fl">🎯 OTIF Target (%)</div><input class="fi" type="number" id="k-ot" placeholder="95" value="${e?e.otif_target:95}"/></div>
+        <div><div class="fl">✅ OTIF Thực tế (%)</div><input class="fi" type="number" id="k-oa" placeholder="0" value="${e?e.otif_actual:0}"/></div>
+        <div><div class="fl">📋 Báo cáo gửi đúng giờ (lần)</div><input class="fi" type="number" id="k-rpt" placeholder="0" value="${e?e.report_ontime:0}"/></div>
+        <div><div class="fl">🚨 Số sự cố phát sinh</div><input class="fi" type="number" id="k-inc" placeholder="0" value="${e?e.incident_count:0}"/></div>
+        <div><div class="fl">📦 Tỉ lệ hàng hỏng (%)</div><input class="fi" type="number" id="k-dmg" placeholder="0" step="0.01" value="${e?e.damage_rate:0}"/></div>
+        <div><div class="fl">⏰ GF booking trễ (lần)</div><input class="fi" type="number" id="k-lb" placeholder="0" value="${e?e.late_booking_gf:0}"/></div>
+      </div>
+      <div class="fact">
+        <button class="btn btn-p" onclick="saveKPI()">💾 Lưu KPI</button>
+        <button class="btn btn-g" onclick="openEdit=null;renderKPI()">Huỷ</button>
+        ${e?`<button class="btn btn-danger" onclick="delKPI('${e.id}')">🗑</button>`:''}
+      </div>
+    </div>`;
+  }
+
+  const sorted=[...data.kpi].sort((a,b)=>String(b.week).localeCompare(String(a.week)));
+  if(sorted.length){
+    const latest=sorted[0];
+    const otif=+latest.otif_actual||0;
+    const target=+latest.otif_target||95;
+    html+=`<div class="kpi-grid">
+      <div class="kpi-card" style="border-top:3px solid ${otif>=target?'#27500A':'#A32D2D'}">
+        <div class="kpi-pct" style="color:${otif>=target?'#27500A':'#A32D2D'}">${otif}%</div>
+        <div class="kpi-lbl">OTIF – Giao đúng giờ & đủ hàng</div>
+        <div class="kpi-target">Target: ${target}% | Tuần: ${latest.week}</div>
+      </div>
+      <div class="kpi-card" style="border-top:3px solid ${(+latest.damage_rate||0)<=1?'#27500A':'#A32D2D'}">
+        <div class="kpi-pct" style="color:${(+latest.damage_rate||0)<=1?'#27500A':'#A32D2D'}">${latest.damage_rate||0}%</div>
+        <div class="kpi-lbl">Tỉ lệ hàng hỏng</div>
+        <div class="kpi-target">Target: ≤1%</div>
+      </div>
+      <div class="kpi-card" style="border-top:3px solid ${(+latest.incident_count||0)===0?'#27500A':'#BA7517'}">
+        <div class="kpi-pct" style="color:${(+latest.incident_count||0)===0?'#27500A':'#BA7517'}">${latest.incident_count||0}</div>
+        <div class="kpi-lbl">Sự cố trong tuần</div>
+        <div class="kpi-target">Target: 0</div>
+      </div>
+      <div class="kpi-card" style="border-top:3px solid ${(+latest.late_booking_gf||0)===0?'#27500A':'#BA7517'}">
+        <div class="kpi-pct" style="color:${(+latest.late_booking_gf||0)===0?'#27500A':'#BA7517'}">${latest.late_booking_gf||0}</div>
+        <div class="kpi-lbl">GF booking trễ (lần)</div>
+        <div class="kpi-target">Target: 0</div>
+      </div>
+    </div>`;
+  }
+
+  html+=`<div class="tbl-wrap"><table>
+    <thead><tr><th>Tuần</th><th>OTIF Target</th><th>OTIF Thực tế</th><th>Báo cáo đúng giờ</th><th>Sự cố</th><th>Hàng hỏng %</th><th>GF booking trễ</th><th>Ghi chú</th><th></th></tr></thead>
+    <tbody>`;
+  if(!sorted.length){html+=`<tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:20px">Chưa có dữ liệu KPI. Nhấn "+ Nhập KPI tuần này".</td></tr>`;}
+  sorted.forEach(k=>{
+    const ok=+k.otif_actual>=(+k.otif_target||95);
+    html+=`<tr>
+      <td style="font-weight:700">${k.week}</td>
+      <td>${k.otif_target||95}%</td>
+      <td><span class="badge ${ok?'s-done':'s-blocked'}">${k.otif_actual||0}%</span></td>
+      <td>${k.report_ontime||0} lần</td>
+      <td>${(+k.incident_count||0)>0?`<span class="badge s-pending">${k.incident_count}</span>`:`<span style="color:var(--gnt)">0 ✓</span>`}</td>
+      <td>${(+k.damage_rate||0)>1?`<span class="badge s-blocked">${k.damage_rate}%</span>`:`<span style="color:var(--gnt)">${k.damage_rate||0}% ✓</span>`}</td>
+      <td>${(+k.late_booking_gf||0)>0?`<span class="badge s-pending">${k.late_booking_gf} lần</span>`:`<span style="color:var(--gnt)">0 ✓</span>`}</td>
+      <td style="font-size:11px;color:var(--tx3)">${esc(k.note)}</td>
+      <td><button class="btn btn-g btn-sm" onclick='editKPI(${JSON.stringify(k).replace(/'/g,"&#39;")})'>✏️</button></td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  document.getElementById('content').innerHTML=html;
+}
+function getWeek(){const d=new Date();const j=new Date(Date.UTC(d.getFullYear(),0,1));const w=Math.ceil(((d-j)/86400000+j.getDay()+1)/7);return d.getFullYear()+'-W'+String(w).padStart(2,'0');}
+function openKPIForm(d){openEdit=d==='new'?'new-kpi':d;renderKPI();}
+function editKPI(o){o._kpi=true;openEdit=o;renderKPI();}
+async function saveKPI(){
+  const row={_kpi:true,id:typeof openEdit==='object'&&openEdit.id?openEdit.id:nextId(data.kpi),week:document.getElementById('k-week').value,otif_target:document.getElementById('k-ot').value,otif_actual:document.getElementById('k-oa').value,report_ontime:document.getElementById('k-rpt').value,incident_count:document.getElementById('k-inc').value,damage_rate:document.getElementById('k-dmg').value,late_booking_gf:document.getElementById('k-lb').value,note:document.getElementById('k-note').value};
+  const idx=data.kpi.findIndex(x=>String(x.id)===String(row.id));
+  if(idx>=0)data.kpi[idx]=row;else data.kpi.push(row);
+  await saveRow('KPI',row);openEdit=null;renderKPI();
+}
+async function delKPI(id){if(!confirm('Xoá?'))return;data.kpi=data.kpi.filter(x=>String(x.id)!==String(id));await deleteRow('KPI',id);openEdit=null;renderKPI();}
+
+// ===== COSTS =====
+function renderCosts(){
+  let html=`
+  <div class="sec">💰 Chi phí phát sinh & Đối soát <span class="sec-badge">Cost Tracker</span></div>
+  <div class="ctrls">
+    <button class="btn btn-p" onclick="openCostForm('new')">+ Thêm chi phí</button>
+  </div>`;
+
+  if(openEdit==='new-cost'||typeof openEdit==='object'&&openEdit._cost){
+    const e=typeof openEdit==='object'?openEdit:null;
+    html+=`<div class="form-panel">
+      <h4>${e?'✏️ Chỉnh sửa chi phí':'💰 Thêm khoản chi phí'}</h4>
+      <div class="fg">
+        <div><div class="fl">Tháng (VD: 2026-06)</div><input class="fi" id="c-month" placeholder="2026-06" value="${e?e.month:today().slice(0,7)}"/></div>
+        <div><div class="fl">Loại chi phí</div>
+          <select class="fi" id="c-type">
+            <option value="storage" ${e&&e.type==='storage'?'selected':''}>Lưu kho (Storage)</option>
+            <option value="handling" ${e&&e.type==='handling'?'selected':''}>Bốc xếp (Handling)</option>
+            <option value="late_booking" ${e&&e.type==='late_booking'?'selected':''}>Phát sinh do booking trễ</option>
+            <option value="over_capacity" ${e&&e.type==='over_capacity'?'selected':''}>Vượt năng lực cam kết</option>
+            <option value="damage" ${e&&e.type==='damage'?'selected':''}>Bồi thường hàng hỏng</option>
+            <option value="transport" ${e&&e.type==='transport'?'selected':''}>Vận chuyển (Transport)</option>
+            <option value="other" ${e&&e.type==='other'?'selected':''}>Khác</option>
+          </select>
+        </div>
+        <div class="fg-full"><div class="fl">Mô tả chi tiết</div><input class="fi" id="c-desc" placeholder="VD: Lưu kho tháng 06/2026 – 50 pallet" value="${esc(e?e.desc:'')}"/></div>
+        <div><div class="fl">Giá trị hợp đồng (VNĐ)</div><input class="fi" type="number" id="c-contract" placeholder="0" value="${e?e.contract_amt:0}"/></div>
+        <div><div class="fl">Giá trị thực tế (VNĐ)</div><input class="fi" type="number" id="c-actual" placeholder="0" value="${e?e.actual_amt:0}"/></div>
+        <div><div class="fl">Chênh lệch (tự tính)</div><input class="fi" id="c-diff" placeholder="= Thực tế – Hợp đồng" readonly style="background:var(--bg2)"/></div>
+        <div><div class="fl">Lý do chênh lệch</div><input class="fi" id="c-reason" placeholder="VD: Booking trễ ngày 10/06, phát sinh thêm 2 cont" value="${esc(e?e.reason:'')}"/></div>
+        <div><div class="fl">Phê duyệt bởi</div><input class="fi" id="c-approved" placeholder="Tên / chức vụ" value="${esc(e?e.approved_by:'')}"/></div>
+      </div>
+      <div class="fact">
+        <button class="btn btn-p" onclick="saveCost()">💾 Lưu</button>
+        <button class="btn btn-g" onclick="openEdit=null;renderCosts()">Huỷ</button>
+        ${e?`<button class="btn btn-danger" onclick="delCost('${e.id}')">🗑</button>`:''}
+      </div>
+    </div>`;
+    // live diff calc
+    setTimeout(()=>{
+      const ca=document.getElementById('c-contract'),ac=document.getElementById('c-actual'),df=document.getElementById('c-diff');
+      if(ca&&ac&&df){
+        function calc(){const d=(+ac.value||0)-(+ca.value||0);df.value=(d>0?'+':'')+d.toLocaleString()+' đ';df.style.color=d>0?'#A32D2D':d<0?'#27500A':'var(--tx3)';}
+        ca.oninput=ac.oninput=calc;calc();
+      }
+    },80);
+  }
+
+  const byCost=data.costs.reduce((s,c)=>{s.contract+=(+c.contract_amt||0);s.actual+=(+c.actual_amt||0);return s;},{contract:0,actual:0});
+  const diff=byCost.actual-byCost.contract;
+  html+=`<div class="cards">
+    <div class="card" style="border-left-color:#185FA5"><div class="card-lbl">Tổng theo hợp đồng</div><div class="card-val" style="font-size:16px;color:#185FA5">${(byCost.contract/1000000).toFixed(1)}M</div><div class="card-sub">VNĐ</div></div>
+    <div class="card" style="border-left-color:#BA7517"><div class="card-lbl">Tổng thực tế phát sinh</div><div class="card-val" style="font-size:16px;color:#BA7517">${(byCost.actual/1000000).toFixed(1)}M</div><div class="card-sub">VNĐ</div></div>
+    <div class="card" style="border-left-color:${diff>0?'#A32D2D':'#27500A'}"><div class="card-lbl">Chênh lệch</div><div class="card-val" style="font-size:16px;color:${diff>0?'#A32D2D':'#27500A'}">${diff>0?'+':''} ${(diff/1000000).toFixed(1)}M</div><div class="card-sub">${diff>0?'Vượt hợp đồng':'Tiết kiệm'}</div></div>
+    <div class="card" style="border-left-color:#534AB7"><div class="card-lbl">Số khoản chi phí</div><div class="card-val">${data.costs.length}</div></div>
+  </div>`;
+
+  const sorted=[...data.costs].sort((a,b)=>String(b.month).localeCompare(String(a.month)));
+  const ctypes={'storage':'Lưu kho','handling':'Bốc xếp','late_booking':'Booking trễ','over_capacity':'Vượt công suất','damage':'Bồi thường','transport':'Vận chuyển','other':'Khác'};
+  html+=`<div class="tbl-wrap"><table>
+    <thead><tr><th>Tháng</th><th>Loại</th><th>Mô tả</th><th>Hợp đồng (VNĐ)</th><th>Thực tế (VNĐ)</th><th>Chênh lệch</th><th>Lý do</th><th>Phê duyệt</th><th></th></tr></thead>
+    <tbody>`;
+  if(!sorted.length){html+=`<tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:20px">Chưa có dữ liệu chi phí.</td></tr>`;}
+  sorted.forEach(c=>{
+    const d=(+c.actual_amt||0)-(+c.contract_amt||0);
+    html+=`<tr>
+      <td style="font-weight:700;white-space:nowrap">${c.month}</td>
+      <td><span class="badge s-todo">${ctypes[c.type]||c.type}</span></td>
+      <td style="max-width:200px;white-space:normal;font-size:11px">${esc(c.desc)}</td>
+      <td style="white-space:nowrap">${Number(c.contract_amt||0).toLocaleString()}</td>
+      <td style="white-space:nowrap">${Number(c.actual_amt||0).toLocaleString()}</td>
+      <td style="white-space:nowrap"><span class="${d>0?'cost-neg':d<0?'cost-pos':''}">${d>0?'+':''}${d.toLocaleString()}</span></td>
+      <td style="max-width:160px;white-space:normal;font-size:11px;color:var(--tx2)">${esc(c.reason)}</td>
+      <td style="font-size:11px;color:var(--tx3)">${esc(c.approved_by)}</td>
+      <td><button class="btn btn-g btn-sm" onclick='editCost(${JSON.stringify(c).replace(/'/g,"&#39;")})'>✏️</button></td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  document.getElementById('content').innerHTML=html;
+}
+function openCostForm(d){openEdit=d==='new'?'new-cost':d;renderCosts();}
+function editCost(o){o._cost=true;openEdit=o;renderCosts();}
+async function saveCost(){
+  const ca=+document.getElementById('c-contract').value||0,ac=+document.getElementById('c-actual').value||0;
+  const row={_cost:true,id:typeof openEdit==='object'&&openEdit.id?openEdit.id:nextId(data.costs),month:document.getElementById('c-month').value,type:document.getElementById('c-type').value,desc:document.getElementById('c-desc').value,contract_amt:ca,actual_amt:ac,diff:ac-ca,reason:document.getElementById('c-reason').value,approved_by:document.getElementById('c-approved').value};
+  const idx=data.costs.findIndex(x=>String(x.id)===String(row.id));
+  if(idx>=0)data.costs[idx]=row;else data.costs.push(row);
+  await saveRow('Costs',row);openEdit=null;renderCosts();
+}
+async function delCost(id){if(!confirm('Xoá?'))return;data.costs=data.costs.filter(x=>String(x.id)!==String(id));await deleteRow('Costs',id);openEdit=null;renderCosts();}
+
+// ===== GANTT =====
+function renderGantt(){
+  const tasks=data.tasks;
+  const done=tasks.filter(t=>t.st==='done').length;
+  const prog=tasks.length?Math.round(tasks.reduce((s,t)=>s+(+t.pct||0),0)/tasks.length):0;
+  let html=`
+  <div class="sec">📅 Master Plan – Project Timeline</div>
+  <div class="cards" style="grid-template-columns:repeat(4,1fr)">
+    <div class="card" style="border-left-color:#534AB7"><div class="card-lbl">Tiến độ tổng</div><div class="card-val" style="color:#534AB7">${prog}%</div></div>
+    <div class="card" style="border-left-color:#27500A"><div class="card-lbl">✅ Done</div><div class="card-val" style="color:#27500A">${done}/${tasks.length}</div></div>
+    <div class="card" style="border-left-color:#185FA5"><div class="card-lbl">🔵 Đang chạy</div><div class="card-val" style="color:#185FA5">${tasks.filter(t=>t.st==='doing').length}</div></div>
+    <div class="card" style="border-left-color:#A32D2D"><div class="card-lbl">🔴 Blocked</div><div class="card-val" style="color:#A32D2D">${tasks.filter(t=>t.st==='blocked').length}</div></div>
+  </div>
+  <div class="ctrls">
+    <select id="pf" onchange="renderGantt()">
+      <option value="all">Tất cả giai đoạn</option>
+      ${Object.entries(PN).map(([k,v])=>`<option value="${k}">${k} – ${v}</option>`).join('')}
+    </select>
+    <select id="sf" onchange="renderGantt()">
+      <option value="all">Tất cả trạng thái</option>
+      ${Object.entries(SL).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}
+    </select>
+    <button class="btn btn-p" onclick="addTask()">+ Thêm task</button>
+  </div>
+  <div class="legend">
+    ${Object.entries(SC).map(([k,c])=>`<span><span class="ldot" style="background:${c}"></span>${SL[k]}</span>`).join('')}
+    &nbsp;|&nbsp;
+    <span><span class="tr">R</span> Thực hiện</span>
+    <span><span class="ta">A</span> Trách nhiệm</span>
+    <span><span class="tc">C</span> Tham vấn</span>
+    <span><span class="ti">I</span> Thông báo</span>
+  </div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th style="width:26px">TT</th><th style="min-width:190px">Công việc</th><th>GF</th><th>LN</th><th>Trạng thái</th><th>%HT</th><th>Start</th><th>End</th><th>R/A/C/I</th><th style="min-width:260px">Timeline</th><th>Edit</th></tr></thead>
+    <tbody id="gb"></tbody>
+  </table></div>`;
+  document.getElementById('content').innerHTML=html;
+
+  const pf=document.getElementById('pf')?.value||'all';
+  const sf=document.getElementById('sf')?.value||'all';
+  const filtered=tasks.filter(t=>(pf==='all'||t.ph===pf)&&(sf==='all'||t.st===sf));
+  let rows='',lastPh='';
+  filtered.forEach(t=>{
+    if(t.ph!==lastPh){lastPh=t.ph;rows+=`<tr class="ph-row"><td colspan="11"><span style="background:${PC[t.ph]};color:#fff;padding:1px 9px;border-radius:9px;font-size:11px;font-weight:700;margin-right:6px">${t.ph}</span>${PN[t.ph]}</td></tr>`;}
+    const so=doff(t.s),eo=doff(t.e),dur=Math.max(1,eo-so+1);
+    const lft=Math.max(0,(so/TDAYS)*100).toFixed(1);
+    const wid=Math.min(100-parseFloat(lft),(dur/TDAYS)*100).toFixed(1);
+    let orig='';
+    if(t.os!==t.s||t.oe!==t.e){const ol=Math.max(0,(doff(t.os)/TDAYS)*100).toFixed(1);const ow=Math.min(100-parseFloat(ol),(Math.max(1,doff(t.oe)-doff(t.os)+1)/TDAYS)*100).toFixed(1);orig=`<div class="bar" style="left:${ol}%;width:${ow}%;background:#534AB7;opacity:.2"></div>`;}
+    const isO=openEdit===String(t.id);
+    rows+=`<tr>
+      <td style="color:var(--tx3);font-size:11px">${t.tt}</td>
+      <td style="white-space:normal;min-width:180px;max-width:240px"><div class="name-en">${esc(t.name)}</div><div class="name-vi">${esc(t.name_vi)}</div></td>
       <td style="text-align:center">${t.gf?'<span style="color:#27500A;font-weight:700">✓</span>':''}</td>
       <td style="text-align:center">${t.ln?'<span style="color:#185FA5;font-weight:700">✓</span>':''}</td>
       <td><span class="badge ${SS[t.st]}">${SL[t.st]}</span></td>
-      <td><span class="pb"><span class="pbf" style="width:${t.pct}%"></span></span> <span style="font-size:11px;color:#9c9c94">${t.pct}%</span></td>
-      <td style="font-size:11px;white-space:nowrap;color:#5c5c56">${fmt(t.s)}</td>
-      <td style="font-size:11px;white-space:nowrap;color:#5c5c56">${fmt(t.e)}</td>
-      <td>${raciCell(t)}</td>
-      <td class="bar-cell"><div class="bwrap">${orig}<div class="bar" style="left:${lft}%;width:${wid}%;background:${SC[t.st]}" title="${fmt(t.s)}→${fmt(t.e)}"></div></div></td>
-      <td><button onclick="toggleEdit(${t.id})" style="background:${isOpen?'#EEEDFE':'#fff'};border:1px solid ${isOpen?'#534AB7':'#d0cfc8'};border-radius:6px;padding:3px 10px;cursor:pointer;font-size:12px;color:${isOpen?'#534AB7':'#5c5c56'};font-weight:600">${isOpen?'✕':'✏️ Sửa'}</button></td>
-    </tr>${isOpen?renderEP(t):''}`;
+      <td><span class="pb"><span class="pbf" style="width:${t.pct}%"></span></span> <span style="font-size:11px;color:var(--tx3)">${t.pct}%</span></td>
+      <td style="font-size:11px;white-space:nowrap">${fmt(t.s)}</td>
+      <td style="font-size:11px;white-space:nowrap">${fmt(t.e)}</td>
+      <td style="min-width:140px;line-height:1.9;font-size:10px">
+        <div><span class="tr">R</span> ${esc(t.r)}</div>
+        <div><span class="ta">A</span> ${esc(t.a)}</div>
+        <div><span class="tc">C</span> ${esc(t.c)}</div>
+        <div><span class="ti">I</span> ${esc(t.i)}</div>
+      </td>
+      <td class="bar-cell"><div class="bwrap">${orig}<div class="bar" style="left:${lft}%;width:${wid}%;background:${SC[t.st]}"></div></div></td>
+      <td><button onclick="toggleTask('${t.id}')" style="background:${isO?'#EEEDFE':'#fff'};border:1px solid ${isO?'#534AB7':'#d0cfc8'};border-radius:6px;padding:2px 9px;cursor:pointer;font-size:12px;color:${isO?'#534AB7':'#5c5c56'};font-weight:600">${isO?'✕':'✏️'}</button></td>
+    </tr>
+    ${isO?renderTaskEP(t):''}`;
   });
-  document.getElementById('gb').innerHTML=html;
-  renderStats();renderAlerts();
+  document.getElementById('gb').innerHTML=rows;
 }
 
-function renderEP(t){
-  return `<tr><td colspan="11" style="padding:0 10px 10px">
-    <div class="ep">
-      <h4>✏️ Chỉnh sửa: ${t.name}</h4>
-      <div class="ep-grid">
-        <div class="ep-full"><div class="ep-lbl">Tên (tiếng Anh)</div><input class="ep-input" id="n-${t.id}" value="${t.name}"/></div>
-        <div class="ep-full"><div class="ep-lbl">Tên (tiếng Việt)</div><input class="ep-input" id="nv-${t.id}" value="${t.name_vi||''}"/></div>
-        <div><div class="ep-lbl">Ngày bắt đầu</div><input class="ep-input" type="date" id="s-${t.id}" value="${t.s}"/></div>
-        <div><div class="ep-lbl">Ngày kết thúc</div><input class="ep-input" type="date" id="e-${t.id}" value="${t.e}"/></div>
-        <div><div class="ep-lbl">Trạng thái</div>
-          <select class="ep-input" id="st-${t.id}">
-            <option value="todo"${t.st==='todo'?' selected':''}>⬜ Chưa bắt đầu</option>
-            <option value="doing"${t.st==='doing'?' selected':''}>🔵 Đang thực hiện</option>
-            <option value="pending"${t.st==='pending'?' selected':''}>⏳ Pending – Chờ xử lý</option>
-            <option value="done"${t.st==='done'?' selected':''}>✅ Done – Hoàn thành</option>
-            <option value="blocked"${t.st==='blocked'?' selected':''}>🔴 Blocked – Bị chặn</option>
-          </select>
-        </div>
-        <div><div class="ep-lbl">% Hoàn thành</div><input class="ep-input" type="number" id="p-${t.id}" min="0" max="100" value="${t.pct}"/></div>
+function renderTaskEP(t){
+  return `<tr><td colspan="11" style="padding:0 8px 8px">
+    <div class="form-panel">
+      <h4>✏️ Chỉnh sửa task</h4>
+      <div class="fg">
+        <div class="fg-full"><div class="fl">Tên (EN)</div><input class="fi" id="t-name-${t.id}" value="${esc(t.name)}"/></div>
+        <div class="fg-full"><div class="fl">Tên (VI)</div><input class="fi" id="t-nvi-${t.id}" value="${esc(t.name_vi)}"/></div>
+        <div><div class="fl">Ngày bắt đầu</div><input class="fi" type="date" id="t-s-${t.id}" value="${t.s}"/></div>
+        <div><div class="fl">Ngày kết thúc</div><input class="fi" type="date" id="t-e-${t.id}" value="${t.e}"/></div>
+        <div><div class="fl">Trạng thái</div><select class="fi" id="t-st-${t.id}">${Object.entries(SL).map(([k,v])=>`<option value="${k}"${t.st===k?' selected':''}>${v}</option>`).join('')}</select></div>
+        <div><div class="fl">% Hoàn thành</div><input class="fi" type="number" id="t-p-${t.id}" min="0" max="100" value="${t.pct}"/></div>
       </div>
-      <div class="ep-section">RACI</div>
-      <div class="ep-grid">
-        <div><div class="ep-lbl"><span class="tr">R</span> Responsible – Người thực hiện</div><input class="ep-input" id="r-${t.id}" value="${t.r}"/></div>
-        <div><div class="ep-lbl"><span class="ta">A</span> Accountable – Chịu trách nhiệm chính</div><input class="ep-input" id="a-${t.id}" value="${t.a}"/></div>
-        <div><div class="ep-lbl"><span class="tc">C</span> Consulted – Người tham vấn</div><input class="ep-input" id="c-${t.id}" value="${t.c}"/></div>
-        <div><div class="ep-lbl"><span class="ti">I</span> Informed – Được thông báo</div><input class="ep-input" id="i-${t.id}" value="${t.i}"/></div>
-        <div class="ep-full"><div class="ep-lbl">Lý do thay đổi (nếu có)</div><input class="ep-input" id="note-${t.id}" placeholder="VD: dời vì chờ Lineage phản hồi..."/></div>
+      <div class="fsec">RACI</div>
+      <div class="fg">
+        <div><div class="fl"><span class="tr">R</span> Responsible</div><input class="fi" id="t-r-${t.id}" value="${esc(t.r)}"/></div>
+        <div><div class="fl"><span class="ta">A</span> Accountable</div><input class="fi" id="t-a-${t.id}" value="${esc(t.a)}"/></div>
+        <div><div class="fl"><span class="tc">C</span> Consulted</div><input class="fi" id="t-c-${t.id}" value="${esc(t.c)}"/></div>
+        <div><div class="fl"><span class="ti">I</span> Informed</div><input class="fi" id="t-i-${t.id}" value="${esc(t.i)}"/></div>
+        <div class="fg-full"><div class="fl">Lý do thay đổi</div><input class="fi" id="t-note-${t.id}" placeholder="Lý do dời timeline..."/></div>
       </div>
-      <div class="ep-actions">
-        <button class="btn btn-p" onclick="saveEdit(${t.id})">💾 Lưu thay đổi</button>
-        <button class="btn btn-g" onclick="toggleEdit(${t.id})">Huỷ</button>
-        <button class="btn btn-danger" onclick="delTask(${t.id})">🗑 Xoá task</button>
+      <div class="fact">
+        <button class="btn btn-p" onclick="saveTask('${t.id}')">💾 Lưu</button>
+        <button class="btn btn-g" onclick="openEdit=null;renderGantt()">Huỷ</button>
+        <button class="btn btn-danger" onclick="delTask('${t.id}')">🗑 Xoá</button>
       </div>
     </div>
   </td></tr>`;
 }
 
-function toggleEdit(id){openId=(openId===id)?null:id;renderGantt();}
-
-async function saveEdit(id){
-  const t=tasks.find(x=>String(x.id)===String(id));
-  const ns=document.getElementById('s-'+id).value;
-  const ne=document.getElementById('e-'+id).value;
-  const nst=document.getElementById('st-'+id).value;
-  const npct=Math.min(100,Math.max(0,parseInt(document.getElementById('p-'+id).value)||0));
-  const note=document.getElementById('note-'+id).value;
-  const today=new Date().toLocaleDateString('vi-VN');
+function toggleTask(id){openEdit=openEdit===String(id)?null:String(id);renderGantt();}
+async function saveTask(id){
+  const t=data.tasks.find(x=>String(x.id)===String(id));
+  const ns=document.getElementById('t-s-'+id).value,ne=document.getElementById('t-e-'+id).value;
+  const nst=document.getElementById('t-st-'+id).value,np=+document.getElementById('t-p-'+id).value||0;
   if(t.s!==ns||t.e!==ne){
     const shift=doff(ns)-doff(t.s);
-    await saveChange({date:today,task:t.name,field:'Timeline',old:fmt(t.s)+'→'+fmt(t.e),nw:fmt(ns)+'→'+fmt(ne),note,editor:''});
-    if(shift>0){const ps=['A','B','C','D','E','F'],pi=ps.indexOf(t.ph);tasks.forEach(x=>{if(String(x.id)===String(id))return;if(ps.indexOf(x.ph)>pi){const sd=new Date(x.s);sd.setDate(sd.getDate()+shift);const ed=new Date(x.e);ed.setDate(ed.getDate()+shift);x.s=sd.toISOString().slice(0,10);x.e=ed.toISOString().slice(0,10);}});}
+    data.changes.push({date:todayVi(),task:t.name,field:'Timeline',old:fmt(t.s)+'→'+fmt(t.e),new:fmt(ns)+'→'+fmt(ne),note:document.getElementById('t-note-'+id).value,editor:''});
+    toLS('gf2-changes',data.changes);
+    if(shift>0){const ps=['A','B','C','D','E','F'],pi=ps.indexOf(t.ph);data.tasks.forEach(x=>{if(String(x.id)===String(id))return;if(ps.indexOf(x.ph)>pi){const sd=new Date(x.s);sd.setDate(sd.getDate()+shift);const ed=new Date(x.e);ed.setDate(ed.getDate()+shift);x.s=sd.toISOString().slice(0,10);x.e=ed.toISOString().slice(0,10);}});}
   }
-  if(t.st!==nst) await saveChange({date:today,task:t.name,field:'Trạng thái',old:SL[t.st],nw:SL[nst],note,editor:''});
-  t.name=document.getElementById('n-'+id).value;
-  t.name_vi=document.getElementById('nv-'+id).value;
-  t.s=ns;t.e=ne;t.st=nst;t.pct=npct;
-  t.r=document.getElementById('r-'+id).value;
-  t.a=document.getElementById('a-'+id).value;
-  t.c=document.getElementById('c-'+id).value;
-  t.i=document.getElementById('i-'+id).value;
-  openId=null;
-  await saveTask(t);
-  renderGantt();
+  t.name=document.getElementById('t-name-'+id).value;t.name_vi=document.getElementById('t-nvi-'+id).value;
+  t.s=ns;t.e=ne;t.st=nst;t.pct=Math.min(100,Math.max(0,np));
+  t.r=document.getElementById('t-r-'+id).value;t.a=document.getElementById('t-a-'+id).value;
+  t.c=document.getElementById('t-c-'+id).value;t.i=document.getElementById('t-i-'+id).value;
+  await saveRow('Tasks',t);openEdit=null;renderGantt();
 }
+async function delTask(id){if(!confirm('Xoá task?'))return;data.tasks=data.tasks.filter(x=>String(x.id)!==String(id));await deleteRow('Tasks',id);openEdit=null;renderGantt();}
+function addTask(){const mx=nextId(data.tasks);const nt=normalizeTask({id:mx,ph:'F',tt:'*',name:'New Task',name_vi:'Task mới',gf:1,ln:0,st:'todo',pct:0,s:today(),e:today(),os:today(),oe:today(),r:'',a:'',c:'',i:'BLD GF'});data.tasks.push(nt);openEdit=String(mx);renderGantt();setTimeout(()=>document.getElementById('t-name-'+mx)?.scrollIntoView({behavior:'smooth',block:'center'}),80);}
 
-async function delTask(id){
-  if(!confirm('Xoá task này?'))return;
-  await deleteTaskRemote(id);
-  openId=null;renderGantt();
-}
-
-function addTask(){
-  const maxId=Math.max(0,...tasks.map(x=>parseInt(x.id)||0));
-  const nt={id:maxId+1,ph:'F',tt:'*',name:'New Task',name_vi:'Task mới',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'',a:'',c:'',i:'BLD GF'};
-  tasks.push(nt);openId=nt.id;fpv='all';fsv='all';
-  document.getElementById('pf').value='all';document.getElementById('sf').value='all';
-  renderGantt();
-  setTimeout(()=>{const el=document.getElementById('n-'+nt.id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.focus();el.select();}},80);
-}
-
-function renderStats(){
-  const n=tasks.length,done=tasks.filter(t=>t.st==='done').length,doing=tasks.filter(t=>t.st==='doing').length,avg=n?Math.round(tasks.reduce((s,t)=>s+(parseInt(t.pct)||0),0)/n):0;
-  document.getElementById('sb').innerHTML=`
-    <div class="stat"><div class="stat-lbl">Tổng tasks</div><div class="stat-val">${n}</div></div>
-    <div class="stat"><div class="stat-lbl">✅ Hoàn thành</div><div class="stat-val" style="color:#27500A">${done}</div></div>
-    <div class="stat"><div class="stat-lbl">🔵 Đang chạy</div><div class="stat-val" style="color:#185FA5">${doing}</div></div>
-    <div class="stat"><div class="stat-lbl">📊 Tiến độ</div><div class="stat-val" style="color:#534AB7">${avg}%</div></div>`;
-  document.getElementById('task-count').textContent=n;
-}
-function renderAlerts(){
-  const issues=tasks.filter(t=>t.st==='blocked'||t.st==='pending'),el=document.getElementById('alert-b');
-  if(issues.length){el.style.display='block';el.innerHTML='⚠️ <strong>'+issues.length+' task cần xử lý:</strong> '+issues.map(t=>t.name_vi||t.name).join(' · ');}
-  else el.style.display='none';
-}
-
+// ===== RACI =====
 function renderRaci(){
   const d=[
-    {proc:'Nhập hàng (Inbound)',rows:[
-      ['1','Gửi Booking nhập hàng','Transimex','GF (SC Mgr)','GF / Lineage','BLD GF / HOD','Trước 15h00 D-1'],
-      ['2','Phản hồi kế hoạch nhập','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 17h00 D-1'],
-      ['3','Nhận hàng tại kho','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','08h–17h ngày D'],
-      ['4','Gửi báo cáo nhập hàng','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 09h00 D+1'],
-    ]},
-    {proc:'Xuất hàng (Outbound)',rows:[
-      ['1','Gửi Booking xuất hàng','GF','GF (SC Mgr)','Lineage','BLD GF / HOD','Trước 17h30 D-1'],
-      ['2','Phản hồi kế hoạch xuất','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 18h00 D-1'],
-      ['3','Gửi Trucking Plan (Kế hoạch xe)','GF','GF (SC Mgr)','Lineage','BLD GF / HOD','Trước 18h30 D-1'],
-      ['4','Pick hàng theo xe','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','19h D-1 → 00h D'],
-      ['5','Xuất hàng & Bàn giao tài xế','Lineage','Lineage (WH Mgr)','GF / Tài xế','BLD GF / HOD','Từ 07h00 ngày D'],
-      ['6','Gửi báo cáo tự động hàng ngày','Lineage','Lineage (WH Mgr)','GF','BLD GF / HOD','Trước 09h00 hàng ngày'],
-      ['7','Phản hồi sai sót sau giao hàng','GF','GF (SC Mgr)','Lineage','BLD GF / HOD','Trước 09h00 D+1'],
-    ]},
-    {proc:'Đối soát & Thanh toán (Reconciliation)',rows:[
-      ['1','Tổng hợp chi phí vận hành & Gửi GF','LN BN','LN BN (WH Mgr)','GF','BLD GF / HOD','Ngày 26 hàng tháng'],
-      ['2','GF kiểm tra & phản hồi chi phí','GF','GF (Finance Mgr)','LN BN','BLD GF / HOD','Trong 3 ngày làm việc'],
-      ['3','Xuất hóa đơn & Thanh toán','LN BN','LN BN (WH Mgr)','GF','BLD GF / HOD','Theo điều khoản HĐ'],
-    ]},
+    {p:'Nhập hàng (Inbound)',rows:[['1','Gửi Booking nhập hàng (trước 15h00 D-1)','Transimex','GF (SC Mgr)','GF / Lineage','BLD GF / HOD'],['2','Phản hồi kế hoạch nhập (trước 17h00 D-1)','Lineage','LN WH Mgr','GF','BLD GF / HOD'],['3','Nhận & kiểm hàng tại kho (08h–17h ngày D)','Lineage','LN WH Mgr','GF','BLD GF / HOD'],['4','Gửi báo cáo nhập hàng (trước 09h00 D+1)','Lineage','LN WH Mgr','GF','BLD GF / HOD']]},
+    {p:'Xuất hàng (Outbound)',rows:[['1','Gửi Booking xuất hàng (trước 17h30 D-1)','GF','GF SC Mgr','Lineage','BLD GF / HOD'],['2','Phản hồi kế hoạch xuất (trước 18h00 D-1)','Lineage','LN WH Mgr','GF','BLD GF / HOD'],['3','Gửi Trucking Plan – kế hoạch xe (trước 18h30 D-1)','GF','GF SC Mgr','Lineage','BLD GF / HOD'],['4','Pick hàng theo xe (19h D-1 → 00h D)','Lineage','LN WH Mgr','GF','BLD GF / HOD'],['5','Xuất hàng & bàn giao tài xế (từ 07h00 ngày D)','Lineage','LN WH Mgr','GF / Tài xế','BLD GF / HOD'],['6','Gửi báo cáo tự động hàng ngày (trước 09h00)','Lineage','LN WH Mgr','GF','BLD GF / HOD'],['7','Tiếp nhận & xử lý phản hồi sai sót (trước 09h00 D+1)','GF','GF SC Mgr','Lineage','BLD GF / HOD']]},
+    {p:'Đối soát & Thanh toán (Reconciliation)',rows:[['1','Tổng hợp chi phí & gửi bảng đối soát (ngày 26 hàng tháng)','LN BN','LN WH Mgr','GF','BLD GF / HOD'],['2','GF kiểm tra & phản hồi (trong 3 ngày làm việc)','GF','GF Finance Mgr','LN BN','BLD GF / HOD'],['3','Xuất hóa đơn & Thanh toán (theo điều khoản HĐ)','LN BN','LN WH Mgr','GF','BLD GF / HOD']]},
   ];
-  document.getElementById('raci-content').innerHTML=d.map(p=>`
-    <div class="sec">${p.proc}</div>
-    <div style="overflow-x:auto"><table class="rt"><thead><tr>
-      <th style="width:28px">#</th><th>Công việc</th>
-      <th><span class="tr">R</span> Responsible</th>
-      <th><span class="ta">A</span> Accountable</th>
-      <th><span class="tc">C</span> Consulted</th>
-      <th><span class="ti">I</span> Informed</th>
-      <th>Timeline</th>
-    </tr></thead><tbody>
-    ${p.rows.map(r=>`<tr><td style="color:#9c9c94;text-align:center">${r[0]}</td>
-      <td>${r[1]}</td><td><span class="tr">${r[2]}</span></td>
-      <td><span class="ta">${r[3]}</span></td><td><span class="tc">${r[4]}</span></td>
-      <td><span class="ti">${r[5]}</span></td>
-      <td style="font-size:11px;color:#9c9c94">${r[6]}</td></tr>`).join('')}
-    </tbody></table></div>`).join('');
+  let html=d.map(p=>`
+    <div class="sec">${p.p}</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Công việc & Timeline</th><th><span class="tr">R</span> Responsible – Người thực hiện</th><th><span class="ta">A</span> Accountable – Chịu trách nhiệm</th><th><span class="tc">C</span> Consulted – Tham vấn</th><th><span class="ti">I</span> Informed – Thông báo</th></tr></thead>
+      <tbody>${p.rows.map(r=>`<tr><td style="color:var(--tx3);text-align:center;font-weight:700">${r[0]}</td><td style="min-width:200px;white-space:normal">${r[1]}</td><td><span class="tr">${r[2]}</span></td><td><span class="ta">${r[3]}</span></td><td><span class="tc">${r[4]}</span></td><td><span class="ti">${r[5]}</span></td></tr>`).join('')}</tbody>
+    </table></div>`).join('');
+  document.getElementById('content').innerHTML=html;
 }
 
-function renderReport(){
-  const n=tasks.length,done=tasks.filter(t=>t.st==='done').length,doing=tasks.filter(t=>t.st==='doing').length,pend=tasks.filter(t=>t.st==='pending').length,blk=tasks.filter(t=>t.st==='blocked').length,avg=n?Math.round(tasks.reduce((s,t)=>s+(parseInt(t.pct)||0),0)/n):0;
-  document.getElementById('rsb').innerHTML=`
-    <div class="stat"><div class="stat-lbl">✅ Done</div><div class="stat-val" style="color:#27500A">${done}/${n}</div></div>
-    <div class="stat"><div class="stat-lbl">🔵 Đang chạy</div><div class="stat-val" style="color:#185FA5">${doing}</div></div>
-    <div class="stat"><div class="stat-lbl">⏳ Pending/Blocked</div><div class="stat-val" style="color:#BA7517">${pend+blk}</div></div>
-    <div class="stat"><div class="stat-lbl">📊 Tiến độ tổng</div><div class="stat-val" style="color:#534AB7">${avg}%</div></div>`;
-  const ps=['A','B','C','D','E','F'];
-  document.getElementById('phase-prog').innerHTML=ps.map(p=>{
-    const pt=tasks.filter(t=>t.ph===p);if(!pt.length)return'';
-    const pd=pt.filter(t=>t.st==='done').length,pp=pt.length?Math.round(pt.reduce((s,t)=>s+(parseInt(t.pct)||0),0)/pt.length):0;
-    return `<div class="pbar-wrap">
-      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
-        <span><span style="background:${PC[p]};color:#fff;padding:1px 9px;border-radius:8px;font-size:11px;margin-right:6px;font-weight:700">${p}</span>${PN[p]}</span>
-        <span style="color:#9c9c94">${pd}/${pt.length} · ${pp}%</span>
-      </div>
-      <div style="height:7px;background:#e5e4dd;border-radius:4px;overflow:hidden">
-        <div style="height:100%;width:${pp}%;background:${PC[p]};border-radius:4px"></div>
-      </div></div>`;
-  }).join('');
-  const issues=tasks.filter(t=>t.st==='blocked'||t.st==='pending');
-  document.getElementById('issue-list').innerHTML=issues.length===0?'<p style="color:#9c9c94;font-size:13px">Không có mục nào ✅</p>':issues.map(t=>`
-    <div class="issue-item">
-      <span><span class="badge ${SS[t.st]}" style="margin-right:8px">${SL[t.st]}</span><span style="font-weight:500">${t.name}</span>${t.name_vi?`<span style="color:#9c9c94;font-size:11px"> – ${t.name_vi}</span>`:''}</span>
-      <span style="font-size:11px;color:#9c9c94;white-space:nowrap;margin-left:8px">${fmt(t.s)}→${fmt(t.e)}</span>
-    </div>`).join('');
-  document.getElementById('chg-log').innerHTML=changes.length===0?'<p style="color:#9c9c94;font-size:13px">Chưa có thay đổi nào</p>':changes.slice().reverse().map(c=>`
-    <div class="chg-item">
-      <div style="font-weight:700;margin-bottom:2px">${c.task}</div>
-      <div style="color:#5c5c56">${c.field}: <span style="color:#A32D2D">${c.old}</span> → <span style="color:#27500A">${c.nw||c.new||''}</span></div>
-      ${c.note?`<div style="color:#9c9c94;margin-top:2px">Lý do: ${c.note}</div>`:''}
-      <div style="font-size:11px;color:#b0b0a8;margin-top:2px">${c.date}</div>
-    </div>`).join('');
+// ===== SETTINGS =====
+function renderSettings(){
+  const doc=document.getElementById('content');
+  doc.innerHTML=`
+  <div class="sec">⚙️ Cài đặt hệ thống</div>
+  <div class="form-panel" style="max-width:600px">
+    <h4>🔗 Kết nối Google Sheets API</h4>
+    <div class="fl" style="margin-top:8px">API URL (Google Apps Script Deployment)</div>
+    <input class="fi" type="text" id="s-api" value="${API}" placeholder="https://script.google.com/macros/s/AKfyc.../exec" style="margin-top:4px;font-family:monospace;font-size:11px"/>
+    <div class="fact">
+      <button class="btn btn-p" onclick="saveApi2()">💾 Lưu & kết nối</button>
+      <button class="btn btn-g" onclick="testApi()">🔍 Test kết nối</button>
+      <button class="btn btn-danger" onclick="clearApi()">🗑 Xoá URL</button>
+    </div>
+    <div id="api-test-result" style="margin-top:8px;font-size:12px"></div>
+  </div>
+  <div class="form-panel" style="max-width:600px;margin-top:12px">
+    <h4>👥 Phân quyền truy cập</h4>
+    <div class="perm-row"><div><div style="font-weight:700">Ban Lãnh Đạo / HOD</div><div style="font-size:11px;color:var(--tx3)">Toàn quyền: xem tất cả, sửa, xóa, thay đổi timeline</div></div><label class="tgl"><input type="checkbox" checked disabled><span class="sld"></span></label></div>
+    <div class="perm-row"><div><div style="font-weight:700">GoodFood – Supply Chain</div><div style="font-size:11px;color:var(--tx3)">Nhập Daily Ops, cập nhật KPI, ghi nhận sự cố, cập nhật task</div></div><label class="tgl"><input type="checkbox" checked><span class="sld"></span></label></div>
+    <div class="perm-row"><div><div style="font-weight:700">Lineage – Warehouse Manager</div><div style="font-size:11px;color:var(--tx3)">Nhập Daily Ops, cập nhật trạng thái task, ghi nhận sự cố</div></div><label class="tgl"><input type="checkbox" checked><span class="sld"></span></label></div>
+    <div class="perm-row"><div><div style="font-weight:700">View only (Consultant / Khách)</div><div style="font-size:11px;color:var(--tx3)">Chỉ xem Dashboard và báo cáo, không chỉnh sửa</div></div><label class="tgl"><input type="checkbox"><span class="sld"></span></label></div>
+  </div>
+  <div class="form-panel" style="max-width:600px;margin-top:12px">
+    <h4>🗄️ Quản lý dữ liệu</h4>
+    <p style="font-size:12px;color:var(--tx3);margin-bottom:10px">Dữ liệu được lưu đồng thời vào Google Sheets (online) và localStorage (offline backup). Nếu mất kết nối, hệ thống vẫn hoạt động và tự đồng bộ lại khi có mạng.</p>
+    <button class="btn btn-danger" onclick="if(confirm('Reset toàn bộ tasks về dữ liệu gốc?')){data.tasks=defaultTasks();toLS('gf2-tasks',data.tasks);alert('Đã reset!');}">🔄 Reset tasks về dữ liệu gốc</button>
+  </div>`;
+}
+function saveApi2(){API=document.getElementById('s-api').value.trim();localStorage.setItem('gf-api-v2',API);loadAll();}
+async function testApi(){
+  const r=document.getElementById('api-test-result');
+  r.innerHTML='<span style="color:var(--am)">Đang test...</span>';
+  try{const res=await apiFetch('ping');r.innerHTML=`<span style="color:var(--gnt)">✅ Kết nối thành công! Sheets: ${res.sheets?.join(', ')}</span>`;}
+  catch(e){r.innerHTML=`<span style="color:var(--rd)">❌ Lỗi: ${e.message}</span>`;}
 }
 
-function getDefaultTasks(){
-  return [
-    {id:1,ph:'A',tt:'1',name:'Meeting GoodFood + Lineage',name_vi:'Họp khởi động GoodFood + Lineage',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'Huân, Hòa, Phương',a:'Hòa',c:'Phương',i:'BLD GF'},
-    {id:2,ph:'A',tt:'2',name:'Drafted SOP',name_vi:'Soạn thảo SOP vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'Hòa',a:'Hòa',c:'GF team',i:'BLD GF'},
-    {id:3,ph:'A',tt:'3',name:'Share SOP to GoodFood',name_vi:'Chia sẻ SOP cho GoodFood',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Hòa',a:'Hòa',c:'GF team',i:'BLD GF'},
-    {id:4,ph:'A',tt:'4',name:'GoodFood share SOP – learning together',name_vi:'GoodFood chia sẻ SOP – cùng học quy trình',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
-    {id:5,ph:'A',tt:'5',name:'Document follow up (VAT, PO, Delivery note)',name_vi:'Theo dõi chứng từ (Hóa đơn VAT, Đơn mua hàng, Phiếu giao hàng)',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân / Hưng / Hiền',a:'GF SC Mgr',c:'Lineage',i:'BLD GF'},
-    {id:6,ph:'A',tt:'6',name:'KPI and expectation sharing',name_vi:'Chia sẻ KPI và kỳ vọng vận hành',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
-    {id:7,ph:'A',tt:'7',name:'Identify WHO DO WHAT for Trial',name_vi:'Xác định ai làm gì trong giai đoạn thử nghiệm',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Hòa / Huân / Hưng / Hiền',a:'Hòa',c:'GF + Lineage',i:'BLD GF'},
-    {id:8,ph:'B',tt:'1',name:'Lineage interview Admin + Assessment risk',name_vi:'Lineage phỏng vấn bộ phận Admin + Đánh giá rủi ro & quyền truy cập hệ thống',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-11',os:'2026-06-10',oe:'2026-06-11',r:'Hạnh',a:'Hòa',c:'Huân',i:'BLD GF'},
-    {id:9,ph:'B',tt:'2',name:'Assessment transportation terminal (incase)',name_vi:'Đánh giá đầu mối vận chuyển (phòng trường hợp cần thay đổi)',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-14',os:'2026-06-10',oe:'2026-06-14',r:'Hạnh',a:'Huân',c:'GF team',i:'BLD GF'},
-    {id:10,ph:'B',tt:'3',name:'People management',name_vi:'Quản lý nhân sự – phân công đội vận hành',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-14',os:'2026-06-10',oe:'2026-06-14',r:'Hạnh / Huân / Hiền',a:'Hòa',c:'GF + Lineage',i:'BLD GF'},
-    {id:11,ph:'B',tt:'4',name:'Truck management after handover',name_vi:'Quản lý xe tải sau khi bàn giao',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-15',e:'2026-06-17',os:'2026-06-15',oe:'2026-06-17',r:'Hạnh / Huân / Hiền',a:'Huân',c:'GF team',i:'BLD GF'},
-    {id:12,ph:'B',tt:'5',name:'Follow up – Lineage deliver OTIF',name_vi:'Theo dõi – Lineage giao hàng đúng thời gian & đủ số lượng (On Time In Full)',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-14',e:'2026-06-18',os:'2026-06-14',oe:'2026-06-18',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
-    {id:13,ph:'B',tt:'6',name:'Trial review meeting',name_vi:'Họp đánh giá kết quả giai đoạn thử nghiệm',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-21',os:'2026-06-21',oe:'2026-06-21',r:'Hòa / Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'Will (consultant)',i:'BLD GF'},
-    {id:14,ph:'B',tt:'7',name:'Identify WHO DO WHAT – next step',name_vi:'Xác định phân công công việc cho giai đoạn tiếp theo',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-21',os:'2026-06-21',oe:'2026-06-21',r:'Hòa / Huân / Hưng / Hạnh',a:'Hòa',c:'Will (consultant)',i:'BLD GF'},
-    {id:15,ph:'B',tt:'8',name:'Adjustment + Drafted contract',name_vi:'Điều chỉnh (nếu cần) + Soạn thảo hợp đồng',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-22',os:'2026-06-21',oe:'2026-06-22',r:'Will',a:'Will',c:'Hòa',i:'BLD GF'},
-    {id:16,ph:'C',tt:'1',name:'Handover FS1 channel',name_vi:'Bàn giao kênh FS1 (Food Service 1) cho Lineage vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-27',e:'2026-07-03',os:'2026-06-27',oe:'2026-07-03',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
-    {id:17,ph:'C',tt:'2',name:'Follow up – Lineage deliver FS1 good service',name_vi:'Theo dõi – Lineage giao hàng kênh FS1 đạt chất lượng dịch vụ',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-27',e:'2026-07-03',os:'2026-06-27',oe:'2026-07-03',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
-    {id:18,ph:'C',tt:'3',name:'Review meeting FS1',name_vi:'Họp đánh giá vận hành kênh FS1',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-02',e:'2026-07-02',os:'2026-07-02',oe:'2026-07-02',r:'Hòa / Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'Will',i:'BLD GF'},
-    {id:19,ph:'D',tt:'1',name:'Handover FS2 channel',name_vi:'Bàn giao kênh FS2 (Food Service 2) cho Lineage vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-07-04',e:'2026-07-10',os:'2026-07-04',oe:'2026-07-10',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
-    {id:20,ph:'D',tt:'2',name:'Follow up – Lineage deliver FS2 good service',name_vi:'Theo dõi – Lineage giao hàng kênh FS2 đạt chất lượng dịch vụ',gf:1,ln:0,st:'todo',pct:0,s:'2026-07-04',e:'2026-07-10',os:'2026-07-04',oe:'2026-07-10',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
-    {id:21,ph:'D',tt:'3',name:'Review meeting FS2',name_vi:'Họp đánh giá vận hành kênh FS2',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-09',e:'2026-07-09',os:'2026-07-09',oe:'2026-07-09',r:'Hòa / Huân / Hưng / Hạnh',a:'Hòa',c:'Will',i:'BLD GF'},
-    {id:22,ph:'E',tt:'1',name:'Handover FS3 channel',name_vi:'Bàn giao kênh FS3 (Food Service 3) cho Lineage vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-07-11',e:'2026-07-17',os:'2026-07-11',oe:'2026-07-17',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
-    {id:23,ph:'E',tt:'2',name:'Follow up – Lineage deliver FS3 good service',name_vi:'Theo dõi – Lineage giao hàng kênh FS3 đạt chất lượng dịch vụ',gf:1,ln:0,st:'todo',pct:0,s:'2026-07-11',e:'2026-07-17',os:'2026-07-11',oe:'2026-07-17',r:'Huân / Hưng / Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
-    {id:24,ph:'E',tt:'3',name:'Review meeting FS3',name_vi:'Họp đánh giá vận hành kênh FS3',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-16',e:'2026-07-16',os:'2026-07-16',oe:'2026-07-16',r:'Hòa / Huân / Hưng / Hạnh',a:'Hòa',c:'Will',i:'BLD GF'},
-    {id:25,ph:'F',tt:'1',name:'Summary review meeting',name_vi:'Họp tổng kết toàn bộ dự án',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-25',e:'2026-07-26',os:'2026-07-25',oe:'2026-07-26',r:'All team',a:'Will',c:'Will / Hòa',i:'BLD GF'},
-    {id:26,ph:'F',tt:'2',name:'Contract sign off',name_vi:'Ký kết hợp đồng chính thức',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-27',e:'2026-07-27',os:'2026-07-27',oe:'2026-07-27',r:'Will',a:'Will',c:'Hòa',i:'BLD GF'},
-    {id:27,ph:'F',tt:'3',name:'Arrange for driver',name_vi:'Sắp xếp tài xế & đội vận chuyển chính thức',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-29',e:'2026-07-29',os:'2026-07-29',oe:'2026-07-29',r:'Hạnh / Hiền / Huân',a:'Will',c:'Huân',i:'BLD GF'},
-    {id:28,ph:'F',tt:'4',name:'Cut-off time – full scope handover',name_vi:'Thời điểm cắt – bàn giao toàn bộ phạm vi vận hành sang Lineage',gf:1,ln:1,st:'todo',pct:0,s:'2026-08-01',e:'2026-08-01',os:'2026-08-01',oe:'2026-08-01',r:'Will / Hòa',a:'Will',c:'Hòa',i:'BLD GF'},
-    {id:29,ph:'F',tt:'5',name:'Identify roles GoodFood & Lineage',name_vi:'Xác định rõ vai trò GoodFood & Lineage trong vận hành dài hạn',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-01',e:'2026-08-01',os:'2026-08-01',oe:'2026-08-01',r:'Hòa / Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'Will',i:'BLD GF'},
-    {id:30,ph:'F',tt:'6',name:'SOP Lineage × GoodFood (full version)',name_vi:'Hoàn thiện SOP vận hành Lineage × GoodFood (phiên bản đầy đủ chính thức)',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-08',e:'2026-08-15',os:'2026-08-08',oe:'2026-08-15',r:'Hòa',a:'Hòa',c:'All team',i:'BLD GF'},
-    {id:31,ph:'F',tt:'7',name:'Review SOP and alignment',name_vi:'Rà soát SOP & đồng thuận cuối cùng giữa hai bên',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-15',e:'2026-08-22',os:'2026-08-15',oe:'2026-08-22',r:'Huân / Hưng / Hạnh / Hiền',a:'Hòa',c:'All team',i:'BLD GF'},
-  ];
-}
+// ===== DEFAULT TASKS =====
+function defaultTasks(){return[
+  {id:1,ph:'A',tt:'1',name:'Meeting GoodFood + Lineage',name_vi:'Họp khởi động GoodFood + Lineage',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'Huân, Hòa, Phương',a:'Hòa',c:'Phương',i:'BLD GF'},
+  {id:2,ph:'A',tt:'2',name:'Drafted SOP',name_vi:'Soạn thảo SOP vận hành',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-08',e:'2026-06-08',os:'2026-06-08',oe:'2026-06-08',r:'Hòa',a:'Hòa',c:'GF team',i:'BLD GF'},
+  {id:3,ph:'A',tt:'3',name:'Share SOP to GoodFood',name_vi:'Chia sẻ SOP cho GoodFood',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Hòa',a:'Hòa',c:'GF team',i:'BLD GF'},
+  {id:4,ph:'A',tt:'4',name:'GoodFood share SOP – learning together',name_vi:'GoodFood chia sẻ SOP – cùng học quy trình',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân/Hưng/Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+  {id:5,ph:'A',tt:'5',name:'Document follow up (VAT, PO, Delivery note)',name_vi:'Theo dõi chứng từ: Hóa đơn VAT, PO, Phiếu giao hàng',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân/Hưng/Hiền',a:'GF SC Mgr',c:'Lineage',i:'BLD GF'},
+  {id:6,ph:'A',tt:'6',name:'KPI and expectation sharing',name_vi:'Chia sẻ KPI và kỳ vọng vận hành',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Huân/Hưng/Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+  {id:7,ph:'A',tt:'7',name:'Identify WHO DO WHAT for Trial',name_vi:'Xác định ai làm gì trong giai đoạn thử nghiệm',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-09',e:'2026-06-09',os:'2026-06-09',oe:'2026-06-09',r:'Hòa/Huân/Hưng/Hiền',a:'Hòa',c:'GF+Lineage',i:'BLD GF'},
+  {id:8,ph:'B',tt:'1',name:'Lineage interview Admin + Assessment risk',name_vi:'Lineage phỏng vấn Admin + Đánh giá rủi ro & quyền truy cập hệ thống',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-11',os:'2026-06-10',oe:'2026-06-11',r:'Hạnh',a:'Hòa',c:'Huân',i:'BLD GF'},
+  {id:9,ph:'B',tt:'2',name:'Assessment transportation terminal',name_vi:'Đánh giá đầu mối vận chuyển (phòng trường hợp thay đổi)',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-14',os:'2026-06-10',oe:'2026-06-14',r:'Hạnh',a:'Huân',c:'GF team',i:'BLD GF'},
+  {id:10,ph:'B',tt:'3',name:'People management',name_vi:'Quản lý nhân sự – phân công đội vận hành',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-10',e:'2026-06-14',os:'2026-06-10',oe:'2026-06-14',r:'Hạnh/Huân/Hiền',a:'Hòa',c:'GF+Lineage',i:'BLD GF'},
+  {id:11,ph:'B',tt:'4',name:'Truck management after handover',name_vi:'Quản lý xe tải sau khi bàn giao',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-15',e:'2026-06-17',os:'2026-06-15',oe:'2026-06-17',r:'Hạnh/Huân/Hiền',a:'Huân',c:'GF team',i:'BLD GF'},
+  {id:12,ph:'B',tt:'5',name:'Follow up – Lineage deliver OTIF',name_vi:'Theo dõi Lineage giao hàng đúng giờ & đủ số lượng (OTIF)',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-14',e:'2026-06-18',os:'2026-06-14',oe:'2026-06-18',r:'Huân/Hưng/Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+  {id:13,ph:'B',tt:'6',name:'Trial review meeting',name_vi:'Họp đánh giá kết quả giai đoạn thử nghiệm',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-21',os:'2026-06-21',oe:'2026-06-21',r:'Hòa/Huân/Hưng/Hạnh/Hiền',a:'Hòa',c:'Will',i:'BLD GF'},
+  {id:14,ph:'B',tt:'7',name:'Identify WHO DO WHAT – next step',name_vi:'Xác định phân công công việc giai đoạn tiếp theo',gf:1,ln:1,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-21',os:'2026-06-21',oe:'2026-06-21',r:'Hòa/Huân/Hưng/Hạnh',a:'Hòa',c:'Will',i:'BLD GF'},
+  {id:15,ph:'B',tt:'8',name:'Adjustment + Drafted contract',name_vi:'Điều chỉnh (nếu cần) + Soạn thảo hợp đồng',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-21',e:'2026-06-22',os:'2026-06-21',oe:'2026-06-22',r:'Will',a:'Will',c:'Hòa',i:'BLD GF'},
+  {id:16,ph:'C',tt:'1',name:'Handover FS1 channel',name_vi:'Bàn giao kênh FS1 (Food Service 1) cho Lineage',gf:0,ln:1,st:'todo',pct:0,s:'2026-06-27',e:'2026-07-03',os:'2026-06-27',oe:'2026-07-03',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
+  {id:17,ph:'C',tt:'2',name:'Follow up – Lineage deliver FS1',name_vi:'Theo dõi Lineage giao hàng kênh FS1 đạt chất lượng',gf:1,ln:0,st:'todo',pct:0,s:'2026-06-27',e:'2026-07-03',os:'2026-06-27',oe:'2026-07-03',r:'Huân/Hưng/Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+  {id:18,ph:'C',tt:'3',name:'Review meeting FS1',name_vi:'Họp đánh giá vận hành kênh FS1',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-02',e:'2026-07-02',os:'2026-07-02',oe:'2026-07-02',r:'Hòa/Huân/Hưng/Hạnh/Hiền',a:'Hòa',c:'Will',i:'BLD GF'},
+  {id:19,ph:'D',tt:'1',name:'Handover FS2 channel',name_vi:'Bàn giao kênh FS2 (Food Service 2) cho Lineage',gf:0,ln:1,st:'todo',pct:0,s:'2026-07-04',e:'2026-07-10',os:'2026-07-04',oe:'2026-07-10',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
+  {id:20,ph:'D',tt:'2',name:'Follow up – Lineage deliver FS2',name_vi:'Theo dõi Lineage giao hàng kênh FS2 đạt chất lượng',gf:1,ln:0,st:'todo',pct:0,s:'2026-07-04',e:'2026-07-10',os:'2026-07-04',oe:'2026-07-10',r:'Huân/Hưng/Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+  {id:21,ph:'D',tt:'3',name:'Review meeting FS2',name_vi:'Họp đánh giá vận hành kênh FS2',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-09',e:'2026-07-09',os:'2026-07-09',oe:'2026-07-09',r:'Hòa/Huân/Hưng/Hạnh',a:'Hòa',c:'Will',i:'BLD GF'},
+  {id:22,ph:'E',tt:'1',name:'Handover FS3 channel',name_vi:'Bàn giao kênh FS3 (Food Service 3) cho Lineage',gf:0,ln:1,st:'todo',pct:0,s:'2026-07-11',e:'2026-07-17',os:'2026-07-11',oe:'2026-07-17',r:'Hòa',a:'Hòa',c:'GF SC Mgr',i:'BLD GF'},
+  {id:23,ph:'E',tt:'2',name:'Follow up – Lineage deliver FS3',name_vi:'Theo dõi Lineage giao hàng kênh FS3 đạt chất lượng',gf:1,ln:0,st:'todo',pct:0,s:'2026-07-11',e:'2026-07-17',os:'2026-07-11',oe:'2026-07-17',r:'Huân/Hưng/Hiền',a:'Huân',c:'Lineage',i:'BLD GF'},
+  {id:24,ph:'E',tt:'3',name:'Review meeting FS3',name_vi:'Họp đánh giá vận hành kênh FS3',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-16',e:'2026-07-16',os:'2026-07-16',oe:'2026-07-16',r:'Hòa/Huân/Hưng/Hạnh',a:'Hòa',c:'Will',i:'BLD GF'},
+  {id:25,ph:'F',tt:'1',name:'Summary review meeting',name_vi:'Họp tổng kết toàn bộ dự án',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-25',e:'2026-07-26',os:'2026-07-25',oe:'2026-07-26',r:'All team',a:'Will',c:'Will/Hòa',i:'BLD GF'},
+  {id:26,ph:'F',tt:'2',name:'Contract sign off',name_vi:'Ký kết hợp đồng chính thức',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-27',e:'2026-07-27',os:'2026-07-27',oe:'2026-07-27',r:'Will',a:'Will',c:'Hòa',i:'BLD GF'},
+  {id:27,ph:'F',tt:'3',name:'Arrange for driver',name_vi:'Sắp xếp tài xế & đội vận chuyển chính thức',gf:1,ln:1,st:'todo',pct:0,s:'2026-07-29',e:'2026-07-29',os:'2026-07-29',oe:'2026-07-29',r:'Hạnh/Hiền/Huân',a:'Will',c:'Huân',i:'BLD GF'},
+  {id:28,ph:'F',tt:'4',name:'Cut-off time – full scope handover',name_vi:'Thời điểm cắt – bàn giao toàn bộ phạm vi vận hành',gf:1,ln:1,st:'todo',pct:0,s:'2026-08-01',e:'2026-08-01',os:'2026-08-01',oe:'2026-08-01',r:'Will/Hòa',a:'Will',c:'Hòa',i:'BLD GF'},
+  {id:29,ph:'F',tt:'5',name:'Identify roles GoodFood & Lineage',name_vi:'Xác định vai trò GoodFood & Lineage trong vận hành dài hạn',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-01',e:'2026-08-01',os:'2026-08-01',oe:'2026-08-01',r:'Hòa/Huân/Hưng/Hạnh/Hiền',a:'Hòa',c:'Will',i:'BLD GF'},
+  {id:30,ph:'F',tt:'6',name:'SOP Lineage × GoodFood (full version)',name_vi:'Hoàn thiện SOP vận hành Lineage × GoodFood (phiên bản đầy đủ)',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-08',e:'2026-08-15',os:'2026-08-08',oe:'2026-08-15',r:'Hòa',a:'Hòa',c:'All team',i:'BLD GF'},
+  {id:31,ph:'F',tt:'7',name:'Review SOP and alignment',name_vi:'Rà soát SOP & đồng thuận cuối cùng giữa hai bên',gf:0,ln:0,st:'todo',pct:0,s:'2026-08-15',e:'2026-08-22',os:'2026-08-15',oe:'2026-08-22',r:'Huân/Hưng/Hạnh/Hiền',a:'Hòa',c:'All team',i:'BLD GF'},
+];}
 
-loadData();
+// ===== INIT =====
+loadApi();
+loadAll();
 </script>
 </body>
 </html>
