@@ -193,9 +193,9 @@ let API='https://script.google.com/macros/s/AKfycbwGdby8xhdGlndUApgPcl4jtekDHyVR
 let openEdit=null,curPage='dashboard';
 
 // ===== API =====
-function loadApi(){API=localStorage.getItem('gf-api-v2')||'';updateConn();}
-function saveApi(){API=document.getElementById('api-input').value.trim();localStorage.setItem('gf-api-v2',API);toggleCfg();loadAll();}
-function clearApi(){API='';localStorage.removeItem('gf-api-v2');updateConn();}
+function loadApi(){const saved=localStorage.getItem('gf-api-v2');if(saved&&saved.trim())API=saved.trim();updateConn();}
+function saveApi(){API=document.getElementById('api-input').value.trim()||API;localStorage.setItem('gf-api-v2',API);toggleCfg();loadAll();}
+function clearApi(){localStorage.removeItem('gf-api-v2');API='https://script.google.com/macros/s/AKfycbwGdby8xhdGlndUApgPcl4jtekDHyVRW1zmlke3hfwKCHEEwlrNHsls8N6-O9gI5mFA/exec';updateConn();}
 function toggleCfg(){const p=document.getElementById('cfg-panel');p.style.display=p.style.display==='block'?'none':'block';if(p.style.display==='block')document.getElementById('api-input').value=API;}
 function updateConn(ok){
   const d=document.getElementById('conn-dot'),l=document.getElementById('conn-lbl');
@@ -934,7 +934,7 @@ function renderSettings(){
     <button class="btn btn-danger" onclick="if(confirm('Reset toàn bộ tasks về dữ liệu gốc?')){data.tasks=defaultTasks();toLS('gf2-tasks',data.tasks);alert('Đã reset!');}">🔄 Reset tasks về dữ liệu gốc</button>
   </div>`;
 }
-function saveApi2(){API=document.getElementById('s-api').value.trim();localStorage.setItem('gf-api-v2',API);loadAll();}
+function saveApi2(){API=document.getElementById('s-api').value.trim()||API;localStorage.setItem('gf-api-v2',API);loadAll();}
 async function testApi(){
   const r=document.getElementById('api-test-result');
   r.innerHTML='<span style="color:var(--am)">Đang test...</span>';
